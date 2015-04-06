@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+    <div th:include="header :: header"></div>
+
+    <body>
+
+        <div th:include="navigation :: navigation"></div>
+
+        <div class="jumbotron"><h1>ABC Member Portal</h1></div>
+        <div class="container-fluid">
+            <div class="wrapper">
+                <form method="post" action="/login">
+                     <div class="form-signin"><label></label>
+                    <h2>Member Sign-In</h2>
+                    <input id="email" name="email" placeholder="Please Input Name" type="email"></input><br/>
+                    <input id="password" name="password" placeholder="Password" type="password"></input>
+
+                    <p></p><label></label><input id="submit" name="submit" value="Submit" type="submit"></input></div>
+                </form>
+            </div>
+        </div>
+
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <!-- Include all compiled plugins (below), or include individual files as needed -->
+        <script src="js/bootstrap.min.js"></script>
+    </body>
+</html>

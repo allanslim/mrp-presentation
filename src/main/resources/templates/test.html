@@ -1,0 +1,53 @@
+<html webdriver="true">
+<head><title>MRX Member Portal</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+<body>
+<nav role="navigation" class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" class="navbar-toggle"><span
+                    class="sronly"></span><span class="icon-bar"></span><span class="icon-bar"></span><span
+                    class="icon-bar"></span></button>
+            <a href="/#" class="navbar-brand">ABC inc. </a></div>
+        <div id="bs-example-navbar-collapse-1" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="/home">Home</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/contact">Contact Us</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="jumbotron"><h1>ABC Member Portal</h1></div>
+<div class="container-fluid">
+    <div class="wrapper">
+        <div class="form-signin"><label></label>
+
+            <h2>Member Sign-In</h2><input id="name" name="name" placeholder="Please Input Name" type="text"><br><input
+                    id="password" name="password" placeholder="Password" type="password">
+
+            <p></p><label></label><input id="submit" name="submit" value="Submit" type="submit"></div>
+    </div>
+</div>
+<script type="text/javascript">$(function () {
+
+    $("#submit").click(function () {
+
+        var user = $("#name").val();
+        var pass = $("#password").val();
+
+        $.post("http://localhost:1337/login", {user: user, password: pass}, function (data) {
+            if (data === 'done') {
+                alert("login success");
+            }
+        });
+    });
+});</script>
+</body>
+</html>
