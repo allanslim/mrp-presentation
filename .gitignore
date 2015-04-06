@@ -33,25 +33,17 @@ target-eclipse
 # PDT-specific
 .buildpath
 
-
-
+! dist/rpm-presentation-0.0.1-SNAPSHOT.jar
 ## java 
 
 *.class
 
 # Package Files #
-*.jar
-*.war
-*.ear
 
 
 ## maven
 target/
 
 
-/nb-configuration.xml
 
-/keychest-server-model/nb-configuration.xml
 
-/keychest-server/nbactions.xml
-/.springBeans
