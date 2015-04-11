@@ -15,7 +15,6 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
-import java.io.IOException;
 import java.util.Optional;
 
 @Controller
@@ -25,29 +24,25 @@ public class HomePageController {
     @Autowired
     private UserService userService;
 
-   @RequestMapping( method = RequestMethod.GET, value = "/")
-   public String index(Model model, LoginCredential loginCredential) {
+    @RequestMapping(method = RequestMethod.GET, value = "/")
+    public String index(LoginCredential loginCredential) {
 
+        return "index";
+    }
 
-       model.addAttribute("greeting", "Hello Allan");
-       return "index";
-   }
-
-    @RequestMapping( method = RequestMethod.POST, value = "/")
+    @RequestMapping(method = RequestMethod.POST, value = "/")
     public String login(HttpServletRequest request, HttpServletResponse response, @Valid LoginCredential loginCredential, BindingResult bindingResult, Model model) {
 
         if (bindingResult.hasErrors()) {
-             return "index";
+            return "index";
         }
 
         Either<MrxError, String> eitherToken = userService.login(loginCredential.getEmail(), loginCredential.getPassword());
 
+        if (eitherToken.isRight()) {
 
-        if(eitherToken.isRight()) {
-
-            response.addCookie( new Cookie("token", eitherToken.right()));
+            response.addCookie(new Cookie("token", eitherToken.right()));
             return "home";
-
         }
 
         MrxError mrxError = eitherToken.left();
@@ -56,59 +51,56 @@ public class HomePageController {
         return "index";
     }
 
-    @RequestMapping( method = RequestMethod.POST, value = "/home")
+    @RequestMapping(method = RequestMethod.POST, value = "/home")
     public String home(HttpServletRequest request, HttpServletResponse response, Model model) {
 
-        if( isTokenValid(request, response)) {
+        if (isTokenValid(request, response)) {
             return "about";
         }
-
 
         return "redirect:/";
     }
 
 
-    @RequestMapping( method = RequestMethod.GET, value = "/about")
+    @RequestMapping(method = RequestMethod.GET, value = "/about")
     public String about(HttpServletRequest request, HttpServletResponse response, Model model) {
 
 
         model.addAttribute("greeting", "Hello Allan");
 
-        if( isTokenValid(request, response)) {
+        if (isTokenValid(request, response)) {
             return "about";
         }
 
         return "redirect:/";
     }
 
-    @RequestMapping( method = RequestMethod.GET, value = "/contactUs")
+    @RequestMapping(method = RequestMethod.GET, value = "/contactUs")
     public String contactUs(HttpServletRequest request, HttpServletResponse response, Model model) {
 
         model.addAttribute("greeting", "Hello Allan");
 
-        if( isTokenValid(request, response)) {
+        if (isTokenValid(request, response)) {
             return "contactUs";
         }
 
         return "redirect:/";
     }
 
-    private boolean isTokenValid(HttpServletRequest request, HttpServletResponse response) {Optional<String> optionalToken = extractToken(request, response);
+    private boolean isTokenValid(HttpServletRequest request, HttpServletResponse response) {
 
-        if(optionalToken.isPresent()) {
-            return userService.validateToken(optionalToken.get());
-        }else {
-            return false;
-        }
+        Optional<String> optionalToken = extractToken(request, response);
+
+        return optionalToken.isPresent() ? userService.validateToken(optionalToken.get()) : false;
     }
 
     private Optional<String> extractToken(HttpServletRequest request, HttpServletResponse response) {
 
         Cookie[] cookies = request.getCookies();
 
-        if(cookies != null ) {
-            for(Cookie cookie : cookies) {
-                if(cookie.getName().equals("token")) {
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("token")) {
                     return Optional.of(cookie.getValue());
                 }
             }

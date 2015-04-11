@@ -26,14 +26,7 @@ public class MrxClient extends BaseClient {
     //curl -i "http://localhost:9595/mrxuser/token/O5HVOAEXG2K32CAKMNMHMXOOYEQOG3TM3FAQLMTD45G0TLZ7IF"
     public String getToken( String token) {
 
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-
-        List<MediaType> acceptTypes = new ArrayList<MediaType>();
-        acceptTypes.add(MediaType.APPLICATION_JSON);
-        headers.setAccept(acceptTypes);
-
-        HttpEntity<String> entity = new HttpEntity<String>(headers);
+        HttpEntity<String> entity = createHttpEntity();
 
         RestTemplate restTemplate = createRestTemplate();
 
@@ -46,14 +39,7 @@ public class MrxClient extends BaseClient {
     // curl -i -XPOST "http://ec2-54-145-194-211.compute-1.amazonaws.com/user/login?email=chong@lee.com&password=abc123"
     public Either<MrxError, String> login(String email, String password) {
 
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-
-        List<MediaType> acceptTypes = new ArrayList<MediaType>();
-        acceptTypes.add(MediaType.APPLICATION_JSON);
-        headers.setAccept(acceptTypes);
-
-        HttpEntity<String> entity = new HttpEntity<String>(headers);
+        HttpEntity<String> entity = createHttpEntity();
 
         RestTemplate restTemplate = createRestTemplate();
 
@@ -77,6 +63,18 @@ public class MrxClient extends BaseClient {
         }
 
         return Either.left(new MrxError("Generic Error", "Generic Error"));
+    }
+
+    private HttpEntity<String> createHttpEntity() {
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        List<MediaType> acceptTypes = new ArrayList<MediaType>();
+        acceptTypes.add(MediaType.APPLICATION_JSON);
+        headers.setAccept(acceptTypes);
+
+        return new HttpEntity<String>(headers);
     }
 
 
