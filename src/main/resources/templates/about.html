@@ -1,20 +1,172 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
-    <div th:include="header :: header"></div>
+<div th:include="header :: header"></div>
 
-    <body>
+<body>
 
-        <div th:include="navigation :: navigation"></div>
+<div th:include="navigation :: navigation"></div>
 
-        <div class="jumbotron"><h1>ABC Member Portal</h1></div>
-        <div class="container-fluid">
-            <h1>About Content Here</h1>
-        </div>
+<div class="jumbotron"><h1>ABC Member Portal</h1></div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<div class="container-fluid">
+    <div id="content">
+        <ul id="tabs" data-tabs="tabs" class="nav nav-tabs nav-justified">
+            <li class="active"><a href="#Prescription" data-toggle="tab"> Prescription Benefit Summary</a> </li>
+            <li><a href="#Claim" data-toggle="tab">Claim History</a></li>
+            <li><a href="#Drug" data-toggle="tab">Drug Price Lookup</a></li>
+            <li><a href="#Locate" data-toggle="tab">Locate a Pharmacy</a></li>
+            <li><a href="#Health" data-toggle="tab">Health and Wellness</a></li>
+        </ul>
+        <div id="my-tab-content" class="tab-content">
+            <div id="Prescription" class="tab-pane active">
+                <div class="text-center">
+                    <h1>Prescription Benefit Summary</h1>
+                </div>
+                <div class="Prescription">
+                    <div class="row">
+                        <div class="col-sm-6 col-md-4">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h2>Welcome</h2>
+                                </div>
+                                <div class="text-center">Member ID: ***insert number***</div>
+                                <div class="text-center">Rx Group ID: ***insert number***</div>
+                                <div class="text-center">Plan Name: ***insert name***</div>
+                                <div class="divider"></div>
+                                <table class="table table-bordered">
+                                    <thead>
+                                    <tr class="active">
+                                        <th> </th>
+                                        <th> </th>
+                                        <th>Individual</th>
+                                        <th>Family</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Deductible</td>
+                                        <td>$0</td>
+                                        <td>$0</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>Deductible Paid YTD</td>
+                                        <td>$0</td>
+                                        <td>$0</td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td>Deductible Remaining YTD</td>
+                                        <td>$0</td>
+                                        <td>$0</td>
+                                    </tr>
+                                    <tr>
+                                        <td>4</td>
+                                        <td>Maximum Out-Of-Pocket</td>
+                                        <td>$2000</td>
+                                        <td>$4000                   </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div><!--panel 1-->
+                        </div><!--col 1-->
+                        <div class="col-sm-6 col-md-4">
+                            <div class="panel panel-default">
+                                <div class="text-center">Copayments/Coinsurance</div>
+                                <div class="panel-heading">RETAIL - Regular Supply</div>
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-sm-6 col-md-4">
+                                            <p>Formulary Generic</p>
+                                            <p>Non-Formulary Generic</p>
+                                            <p>Formulary Brand</p>
+                                            <p>Non-Formulary Brand                   </p>
+                                        </div>
+                                        <div class="col-sm-6 col-md-4">
+                                            <div class="divider-vertical">
+                                                <p>$8.00</p>
+                                                <p>$8.00</p>
+                                                <p>$30.00</p>
+                                                <p>$50.00</p>
+                                            </div>
+                                        </div>
+                                    </div><!--row 1 panel 2-->
+                                </div><!--container 2-->
+                            </div><!--col 2 panel 1-->
+                            <div class="panel panel-default">
+                                <div class="panel-heading">RETAIL - Extended Day Supply</div>
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-sm-6 col-md-4">
+                                            <p>Formulary Generic</p>
+                                            <p>Non-Formulary Generic</p>
+                                            <p>Formulary Brand</p>
+                                            <p>Non-Formulary Brand                   </p>
+                                        </div>
+                                        <div class="col-sm-6 col-md-4">
+                                            <div class="divider-vertical">
+                                                <p>$24.00</p>
+                                                <p>$24.00</p>
+                                                <p>$90.00</p>
+                                                <p>$150.00</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div><!--col 2 panel 2-->
+                            <div class="panel panel-default">
+                                <div class="panel-heading">Mail Order</div>
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-sm-6 col-md-4">
+                                            <p>Formulary Generic</p>
+                                            <p>Non-Formulary Generic</p>
+                                            <p>Formulary Brand</p>
+                                            <p>Non-Formulary Brand                   </p>
+                                        </div>
+                                        <div class="col-sm-6 col-md-4">
+                                            <div class="divider-vertical">
+                                                <p>$16.00</p>
+                                                <p>$16.00</p>
+                                                <p>$60.00</p>
+                                                <p>$100.00</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div><!--col 2 panel 3-->
+                        </div><!--col 2-->
+                    </div><!--row-->
+                </div><!--prescription class-->
+            </div><!--prescription tab-->
+            <div id="Claim" class="tab-pane">
+                <div class="text-center">
+                    <h1>Claim History</h1>
+                </div>
+            </div>
+            <div id="Drug" class="tab-pane">
+                <div class="text-center">
+                    <h1>Drug Price Lookup</h1>
+                </div>
+            </div>
+            <div id="Locate" class="tab-pane">
+                <div class="text-center">
+                    <h1>Locate a Pharmacy</h1>
+                </div>
+            </div>
+            <div id="Health" class="tab-pane">
+                <div class="text-center">
+                    <h1>Health and Wellness</h1>
+                </div>
+            </div>
+        </div><!--tab content-->
+    </div><!--content-->
+</div><!--container-->
 
-        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-        <!-- Include all compiled plugins (below), or include individual files as needed -->
-        <script src="js/bootstrap.min.js"></script>
-    </body>
+
+
+</body>
 </html>
