@@ -30,6 +30,7 @@ public class HomePageController {
         return "index";
     }
 
+
     @RequestMapping(method = RequestMethod.POST, value = "/")
     public String login(HttpServletRequest request, HttpServletResponse response, @Valid LoginCredential loginCredential, BindingResult bindingResult, Model model) {
 
@@ -51,11 +52,18 @@ public class HomePageController {
         return "index";
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/home")
+
+    @RequestMapping(method = RequestMethod.GET, value = "/registration")
+    public String registrationForm() {
+
+        return "registration";
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/home")
     public String home(HttpServletRequest request, HttpServletResponse response, Model model) {
 
         if (isTokenValid(request, response)) {
-            return "about";
+            return "home";
         }
 
         return "redirect:/";
