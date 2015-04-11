@@ -1,6 +1,8 @@
 package com.codewarrior.csc686.project.presentation.service;
 
 import com.codewarrior.csc686.project.presentation.client.MrxClient;
+import com.codewarrior.csc686.project.presentation.util.Either;
+import com.codewarrior.csc686.project.presentation.util.MrxError;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,10 +13,7 @@ public class UserService {
     @Autowired
     private MrxClient mrxClient;
 
-    public String login(String email, String password) {
+    public Either<MrxError, String> login(String email, String password) { return  mrxClient.login(email, password); }
 
-        String token = mrxClient.getToken("abc");
-
-        return "abc123";
-    }
+    public boolean validateToken(String token) { return mrxClient.getToken(token) == null? false : true;  }
 }
