@@ -10,11 +10,7 @@ a {
   margin-bottom: 80px;
 }
 .form-signin {
-  max-width: 380px;
-  padding: 15px 35px 45px;
-  margin: 0 auto;
-  background-color: #72afe4;
-  border: 9px solid rgba(75,5,0,0.1);
+
 }
 .colorgraph {
   height: 5px;
@@ -22,33 +18,36 @@ a {
   background: #c4e17f;
   border-radius: 5px;
 }
-
-.form-register {
-  max-width: 380px;
-  padding: 15px 35px 45px;
-  margin: 0 auto;
-  background-color: #72afe4;
-  border: 9px solid rgba(75,5,0,0.1);
+#brand-image
+    {
+        height: 50px;
+        margin-top: -15px;
+    }
+.jumbotron{
+      margin-top: 0px;
+      background-image: url(https://0.s3.envato.com/files/30321089/Pills%20Background.jpg);
+      background-position: 0% 25%;
+      background-size: cover;
+      background-repeat: no-repeat;
+      color: white;
+      text-shadow: black 0.3em 0.3em 0.3em;
 }
 
-.btn-input {
-   display: block;
+.panel-heading {
+    padding: 5px 15px;
 }
 
-.btn-input .btn.form-control {
-    text-align: left;
+.panel-footer {
+	padding: 1px 15px;
+	color: #A0A0A0;
 }
 
-.btn-input .btn.form-control span:first-child {
-   left: 10px;
-   overflow: hidden;
-   position: absolute;
-   right: 25px;
-}
-
-.btn-input .btn.form-control .caret {
-   margin-top: -1px;
-   position: absolute;
-   right: 10px;
-   top: 50%;
+.profile-img {
+	width: 96px;
+	height: 96px;
+	margin: 0 auto 10px;
+	display: block;
+	-moz-border-radius: 50%;
+	-webkit-border-radius: 50%;
+	border-radius: 50%;
 }
