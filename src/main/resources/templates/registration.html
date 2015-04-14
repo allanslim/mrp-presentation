@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
-<<<<<<< HEAD
+
 <div th:include="header :: header"></div>
 <style>
     body {
@@ -20,7 +20,7 @@
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <script>
   $(function() {
-    $( "#datepicker" ).datepicker();
+    $( "#dob" ).datepicker();
   });
   </script>
 
@@ -47,80 +47,26 @@
     </div>
     <div class="tab-content">
         <div class="tab-pane fade in active" id="step1">
-
-            <div class="well">
                 <div class="well"> <h2>Step 1</h2>
                     <label>Please enter your information</label>
-                    <input class="form-control  input-lg" placeholder="Rx Group ID"></input>
-                    <input class="form-control  input-lg" placeholder="Member ID"></input>
-                    <input class="form-control  input-lg" placeholder="First Name"></input>
-                    <input class="form-control  input-lg" placeholder="Last Name"></input>
-                    <input class="form-control  input-lg" id="datepicker"  placeholder="Date of Birth"></input>
-=======
-    <div th:include="header :: header"></div>
-    <style>
-        body {
-        background-image: url("images/background.png");
-        background-size: cover;
-        }
-    </style>
-    <body>
+                    <label style="color: red;" th:text="${errorMessage}"> </label>
+                    <form  th:action="@{/registration}" th:object="${insuranceForm}" method="POST">
+                        <div class="form-register">
 
-        <div th:include="navigation :: navigation"></div>
+                            <input class="form-control  input-lg" id="rx_grp_id" name="rx_grp_id"  th:field="*{groupId}" placeholder="Rx Group ID" type="text"></input>
+                            <input class="form-control  input-lg" id="member_id" name="member_id"  th:field="*{memberId}" placeholder="Member ID" type="text" ></input>
+                            <input class="form-control  input-lg" id="fname" name="first_name"  th:field="*{firstname}"  placeholder="First Name" type="text" ></input>
+                            <input class="form-control  input-lg" id="lname" name="last_name"  th:field="*{lastname}" placeholder="Last Name" type="text" ></input>
+                            <input class="form-control  input-lg" id="dob" name="date_of_birth"  th:field="*{birthDate}"  placeholder="Date of Birth" type="date"></input>
 
-        <div class="jumbotron"><h1>ABC Member Portal</h1></div>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-
-
-
-
-
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-xs-12 col-sm-8 col-md-10 col-sm-offset-1 col-md-offset-1">
-
-
-                        <h2>Member Registration</h2>
-
-
-                        <div class="row">
-
-
-
-                            <div class="col-sm-6 col-md-4" id="insuranceForm">
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
-                                        <h4>Policy information</h4>
-                                    </div>
-                                    <div class="panel-body">
-                                    <label style="color: red;" th:text="${errorMessage}"> </label>
-                                    <form  th:action="@{/registration}" th:object="${insuranceForm}" method="POST">
-                                        <div class="form-register">
-                                            <input id="rx_grp_id" name="rx_grp_id"  th:field="*{groupId}" placeholder="Rx Group ID" type="text"></input><br/><br/>
-                                            <input id="member_id" name="member_id"  th:field="*{memberId}" placeholder="Member ID" type="text" ></input><br/><br/>
-                                            <input id="fname" name="first_name"  th:field="*{firstname}"  placeholder="First Name" type="text" ></input><br/><br/>
-                                            <input id="lname" name="last_name"  th:field="*{lastname}" placeholder="Last Name" type="text" ></input><br/><br/>
-                                            <input id="dob" name="date_of_birth"  th:field="*{birthDate}"  placeholder="Date of Birth" type="date"></input><br/><br/>
-
-                                            <input id="validate" name="validate" value="Validate" type="submit"></input>
-
-                                        </div>
-                                    </form>
-
-                                    </div>
-                                </div>
-                            </div>
-
+                            <input id="validate" name="validate" value="Validate" type="submit"></input>
                         </div>
->>>>>>> f9176e2695ecc844ccb399ebfa35a5cb7f764eb0
+                    </form>
 
                 </div>
-
             </div>
+                    <!--<a class="btn btn-default btn-lg next" href="#">Continue</a> next" href="#">Continue</a>-->
 
-            <a class="btn btn-default btn-lg next" href="#">Continue</a>
-        </div>
         <div class="tab-pane fade" id="step2">
             <div class="well">
 
@@ -173,14 +119,13 @@
             <a class="btn btn-success first" href="#">Submit</a>
         </div>
 
-    </div>
-
     <hr></hr>
 
     <a href="/terms?">Terms of Use</a>
 
     <hr></hr>
 
+    </div>
 </div>
 <script>$('.next').click(function(){
 
