@@ -18,17 +18,14 @@ import javax.validation.Valid;
 import java.util.Optional;
 
 @Controller
-@RequestMapping("/")
 public class HomePageController {
 
     @Autowired
     private UserService userService;
 
     @RequestMapping(method = RequestMethod.GET, value = "/")
-    public String index(LoginCredential loginCredential) {
+    public String index(LoginCredential loginCredential) { return "index"; }
 
-        return "index";
-    }
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/")
@@ -53,11 +50,7 @@ public class HomePageController {
     }
 
 
-    @RequestMapping(method = RequestMethod.GET, value = "/registration")
-    public String registrationForm() {
 
-        return "registration";
-    }
 
     @RequestMapping(method = RequestMethod.GET, value = "/home")
     public String home(HttpServletRequest request, HttpServletResponse response, Model model) {
