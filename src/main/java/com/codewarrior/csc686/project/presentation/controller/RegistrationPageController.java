@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
-import java.util.Date;
 
 @Controller
 public class RegistrationPageController {
@@ -25,21 +24,17 @@ public class RegistrationPageController {
 
     @RequestMapping(method = RequestMethod.GET, value = "/registration")
     public String registrationForm(InsuranceForm insuranceForm) {
-        insuranceForm.setFirstname("CHONG");
-        insuranceForm.setLastname("LEE");
-        insuranceForm.setBirthDate(new Date());
-        insuranceForm.setGroupId(1);
-        insuranceForm.setMemberId("abc123");
+
 
         return "registration";
     }
-
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/registration")
     public String registerInsuranceForm(HttpServletRequest request, HttpServletResponse response, @Valid InsuranceForm insuranceForm, BindingResult bindingResult, Model model) {
 
         if (bindingResult.hasErrors()) {
+            model.addAttribute("errorMessage", "All fields are required.");
             return "registration";
         }
 
@@ -47,12 +42,28 @@ public class RegistrationPageController {
 
         if (isInsuranceInTheSystem.isRight()) {
 
-            return "registerEmail";
+            return "registrationEmail";
         }
 
         MrxError mrxError = isInsuranceInTheSystem.left();
         model.addAttribute("errorMessage", mrxError.getErrorMessage());
 
-        return "registration";
+        return "registrationEmail";
+    }
+
+
+    @RequestMapping(method = RequestMethod.GET, value = "/registrationEmail")
+    public String registrationEmailAccount(InsuranceForm insuranceForm) {
+
+
+        return "registrationEmail";
+    }
+
+
+    @RequestMapping(method = RequestMethod.GET, value = "/registrationFinal")
+    public String registrationFinal(InsuranceForm insuranceForm) {
+
+
+        return "registrationFinal";
     }
 }
