@@ -13,106 +13,138 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-xs-12 col-sm-8 col-md-10 col-sm-offset-1 col-md-offset-1">
-                    <form role="form">
+
+
                         <h2>Member Registration</h2>
+
+
                         <div class="row">
-                            <div class="col-xs-12 col-sm-6 col-md-4">
+
+
+
+                            <div class="col-sm-6 col-md-4" id="insuranceForm">
                                 <div class="panel panel-default">
                                     <div class="panel-heading">
                                         <h4>Policy information</h4>
                                     </div>
                                     <div class="panel-body">
-                                    <form method="post" action="/register">
+                                    <label style="color: red;" th:text="${errorMessage}"> </label>
+                                    <form  th:action="@{/registration}" th:object="${insuranceForm}" method="POST">
                                         <div class="form-register">
-                                            <input id="rx_grp_id" name="rx_grp_id" placeholder="Rx Group ID" type="text"></input><br/><br/>
-                                            <input id="member_id" name="member_id" placeholder="Member ID" type="text"></input><br/><br/>
-                                            <input id="fname" name="first_name" placeholder="First Name" type="text"></input><br/><br/>
-                                            <input id="lname" name="last_name" placeholder="Last Name" type="text"></input><br/><br/>
-                                            <input id="dob" name="date_of_birth" placeholder="Date of Birth" type="date"></input><br/><br/>
+                                            <input id="rx_grp_id" name="rx_grp_id"  th:field="*{groupId}" placeholder="Rx Group ID" type="text" value="1"></input><br/><br/>
+                                            <input id="member_id" name="member_id"  th:field="*{memberId}" placeholder="Member ID" type="text" value="222"></input><br/><br/>
+                                            <input id="fname" name="first_name"  th:field="*{firstname}"  placeholder="First Name" type="text" value="CHONG"></input><br/><br/>
+                                            <input id="lname" name="last_name"  th:field="*{lastname}" placeholder="Last Name" type="text" value="LEE"></input><br/><br/>
+                                            <input id="dob" name="date_of_birth"  th:field="*{birthDate}"  placeholder="Date of Birth" type="date" value="11/22/2014"></input><br/><br/>
+
                                             <input id="validate" name="validate" value="Validate" type="submit"></input>
 
                                         </div>
                                     </form>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xs-12 col-sm-6 col-md-4">
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
-                                        <h4>Contact information</h4>
-                                    </div>
-                                    <div class="panel-body">
-                                        <form method="post" action="/register">
-                                            <div class="form-register"><label></label>
-                                                <input id="email" name="email" placeholder="Email" type="email"></input><br/><br/>
-                                                <input id="email2" name="email" placeholder="Confirm Email" type="email"></input><br/><br/>
-                                                <input id="password" name="password" placeholder="Password" type="password"></input><br/><br/>
-                                                <input id="password2" name="password" placeholder="Confirm Password" type="password"></input><br/><br/>
 
-                                                <input id="validate2" name="validate2" value="Validate" type="submit"></input></div>
-                                        </form>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-xs-12 col-sm-6 col-md-4">
+
+
+
+                            <!--<div class="col-xs-12 col-sm-6 col-md-4" id="emailForm">-->
+                                <!--<div class="panel panel-default">-->
+                                    <!--<div class="panel-heading">-->
+                                        <!--<h4>Contact information</h4>-->
+                                    <!--</div>-->
+                                    <!--<div class="panel-body">-->
+
+
+
+                                        <!--<form method="post" action="/register">-->
+                                            <!--<div class="form-register"><label></label>-->
+                                                <!--<input id="email" name="email" placeholder="Email" type="email"></input><br/><br/>-->
+                                                <!--<input id="email2" name="email" placeholder="Confirm Email" type="email"></input><br/><br/>-->
+                                                <!--<input id="password" name="password" placeholder="Password" type="password"></input><br/><br/>-->
+                                                <!--<input id="password2" name="password" placeholder="Confirm Password" type="password"></input><br/><br/>-->
+
+                                                <!--<input id="validate2" name="validate2" value="Validate" type="submit"></input></div>-->
+                                        <!--</form>-->
+
+
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</div>-->
+
+
+
+
+                            <div class="col-xs-12 col-sm-6 col-md-4" id="registrationForm">
                                 <div class="panel panel-default">
                                     <div class="panel-heading">
                                         <h4>Security Questions</h4>
                                     </div>
                                     <div class="panel-body">
-                                        <form method="post" action="/register">
-                                            <div class="form-register">
-                                                <div class="row">
-                                                    <div class="col-xs-12 col-sm-6 col-md-4">
-                                                        <select class="form-control" name="question1">
-                                                            <option value="Mother's Maiden Name">Mother's Maiden Name</option>
-                                                            <option value="Father's Middle Name">Father's Middle Name</option>
-                                                            <option value="Favorite Sports Team">Favorite Sports Team</option>
-                                                            <option value="High School Mascot">High School Mascot</option>
-                                                            <option value="First Grade Teacher">First Grade Teacher</option>
-                                                        </select>
-                                                        <br/><br/>
-                                                        <select class="form-control" name="question2">
-                                                            <option value="Best Friend's Name">Best Friend's Name</option>
-                                                            <option value="Date of Birth">Date of Birth</option>
-                                                            <option value="Favorite Color">Favorite Color</option>
-                                                            <option value="Favorite Movie">Favorite Movie</option>
-                                                            <option value="Favorite Hobby">Favorite Hobby</option>
-                                                        </select>
-                                                        <br/><br/>
-                                                        <select class="form-control" name="question3">
-                                                            <option value="Place of Birth">Place of Birth</option>
-                                                            <option value="Model of Your First Car">Model of Your First Car</option>
-                                                            <option value="Favorite Food">Favorite Food</option>
-                                                            <option value="Your First Pets Name">Your First Pets Name</option>
-                                                            <option value="Sibling's Middle Name">Sibling's Middle Name</option>
-                                                        </select>
-                                                        <br/><br/>
-                                                        <button type="submit" class="btn btn-default">Submit</button>
-                                                    </div>
-                                                    <div class="col-xs-12 col-sm-6 col-md-4 col-md-offset-2">
-                                                        <form method="post" action="/register">
-                                                            <div class="form-register"><label></label>
-                                                                <input id="answer1" name="answer1" placeholder="Answer #1" type="text"></input><br/><br/>
-                                                                <br/>
-                                                                <input id="answer2" name="answer2" placeholder="Answer #2" type="text"></input><br/><br/><br/>
-                                                                <input id="answer3" name="answer3" placeholder="Answer #3" type="text"></input><br/><br/>
 
 
-                                                            </div>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                             </div>
-                                        </form>
+
+                                        <!--<form method="post" action="/register">-->
+                                            <!--<div class="form-register">-->
+                                                <!--<div class="row">-->
+                                                    <!--<div class="col-xs-12 col-sm-6 col-md-4">-->
+                                                        <!--<select class="form-control" name="question1">-->
+                                                            <!--<option value="Mother's Maiden Name">Mother's Maiden Name</option>-->
+                                                            <!--<option value="Father's Middle Name">Father's Middle Name</option>-->
+                                                            <!--<option value="Favorite Sports Team">Favorite Sports Team</option>-->
+                                                            <!--<option value="High School Mascot">High School Mascot</option>-->
+                                                            <!--<option value="First Grade Teacher">First Grade Teacher</option>-->
+                                                        <!--</select>-->
+                                                        <!--<br/><br/>-->
+                                                        <!--<select class="form-control" name="question2">-->
+                                                            <!--<option value="Best Friend's Name">Best Friend's Name</option>-->
+                                                            <!--<option value="Date of Birth">Date of Birth</option>-->
+                                                            <!--<option value="Favorite Color">Favorite Color</option>-->
+                                                            <!--<option value="Favorite Movie">Favorite Movie</option>-->
+                                                            <!--<option value="Favorite Hobby">Favorite Hobby</option>-->
+                                                        <!--</select>-->
+                                                        <!--<br/><br/>-->
+                                                        <!--<select class="form-control" name="question3">-->
+                                                            <!--<option value="Place of Birth">Place of Birth</option>-->
+                                                            <!--<option value="Model of Your First Car">Model of Your First Car</option>-->
+                                                            <!--<option value="Favorite Food">Favorite Food</option>-->
+                                                            <!--<option value="Your First Pets Name">Your First Pets Name</option>-->
+                                                            <!--<option value="Sibling's Middle Name">Sibling's Middle Name</option>-->
+                                                        <!--</select>-->
+                                                        <!--<br/><br/>-->
+                                                        <!--<button type="submit" class="btn btn-default">Submit</button>-->
+                                                    <!--</div>-->
+                                                    <!--<div class="col-xs-12 col-sm-6 col-md-4 col-md-offset-2">-->
+                                                        <!--<form method="post" action="/register">-->
+                                                            <!--<div class="form-register"><label></label>-->
+                                                                <!--<input id="answer1" name="answer1" placeholder="Answer #1" type="text"></input><br/><br/>-->
+                                                                <!--<br/>-->
+                                                                <!--<input id="answer2" name="answer2" placeholder="Answer #2" type="text"></input><br/><br/><br/>-->
+                                                                <!--<input id="answer3" name="answer3" placeholder="Answer #3" type="text"></input><br/><br/>-->
+
+
+                                                            <!--</div>-->
+                                                        <!--</form>-->
+                                                    <!--</div>-->
+                                                <!--</div>-->
+                                             <!--</div>-->
+                                        <!--</form>-->
+
+
+
                                     </div>
                                 </div>
                             </div>
+
                         </div>
-                    </form>
+
                 </div>
             </div>
         </div>
 
+    <script>
+//        $('#emailForm').hide();
+//        $('#registrationForm').hide();
+    </script>
     </body>
 </html>
