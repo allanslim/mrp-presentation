@@ -40,10 +40,19 @@
 
 
                                         <form  th:action="@{/registrationFinal}" th:object="${insuranceForm}" method="POST">
+                                            <input class="form-control  input-lg" id="rx_grp_id" name="rx_grp_id"  th:field="*{groupId}" placeholder="Rx Group ID" type="hidden"></input>
+                                            <input class="form-control  input-lg" id="member_id" name="member_id"  th:field="*{memberId}" placeholder="Member ID" type="hidden" ></input>
+                                            <input class="form-control  input-lg" id="fname" name="first_name"  th:field="*{firstname}"  placeholder="First Name" type="hidden" ></input>
+                                            <input class="form-control  input-lg" id="lname" name="last_name"  th:field="*{lastname}" placeholder="Last Name" type="hidden" ></input>
+                                            <input class="form-control  input-lg" id="dob" name="date_of_birth"  th:field="*{birthDate}"  placeholder="Date of Birth" type="hidden"></input>
+
+                                            <input class="form-control  input-lg" id="email" name="email" th:field="*{email}" type="hidden"></input>
+                                            <input class="form-control  input-lg" id="password" name="password" th:field="*{password}" type="hidden"></input>
+
                                             <div class="form-register">
                                                 <div class="row">
                                                     <div class="col-xs-12 col-sm-6 col-md-4">
-                                                        <select class="form-control" name="question1">
+                                                        <select th:field="*{question1}" class="form-control" name="question1">
                                                             <option value="Mother's Maiden Name">Mother's Maiden Name</option>
                                                             <option value="Father's Middle Name">Father's Middle Name</option>
                                                             <option value="Favorite Sports Team">Favorite Sports Team</option>
@@ -51,7 +60,7 @@
                                                             <option value="First Grade Teacher">First Grade Teacher</option>
                                                         </select>
                                                         <br/><br/>
-                                                        <select class="form-control" name="question2">
+                                                        <select th:field="*{question2}" class="form-control" name="question2">
                                                             <option value="Best Friend's Name">Best Friend's Name</option>
                                                             <option value="Date of Birth">Date of Birth</option>
                                                             <option value="Favorite Color">Favorite Color</option>
@@ -59,7 +68,7 @@
                                                             <option value="Favorite Hobby">Favorite Hobby</option>
                                                         </select>
                                                         <br/><br/>
-                                                        <select class="form-control" name="question3">
+                                                        <select th:field="*{question3}" class="form-control" name="question3">
                                                             <option value="Place of Birth">Place of Birth</option>
                                                             <option value="Model of Your First Car">Model of Your First Car</option>
                                                             <option value="Favorite Food">Favorite Food</option>
@@ -70,16 +79,16 @@
                                                         <button type="submit" class="btn btn-default">Submit</button>
                                                     </div>
                                                     <div class="col-xs-12 col-sm-6 col-md-4 col-md-offset-2">
-                                                        <form method="post" action="/register">
+
                                                             <div class="form-register"><label></label>
-                                                                <input id="answer1" name="answer1" placeholder="Answer #1" type="text"></input><br/><br/>
+                                                                <input id="answer1" th:field="*{answer1}" name="answer1" placeholder="Answer #1" type="text"></input><br/><br/>
                                                                 <br/>
-                                                                <input id="answer2" name="answer2" placeholder="Answer #2" type="text"></input><br/><br/><br/>
-                                                                <input id="answer3" name="answer3" placeholder="Answer #3" type="text"></input><br/><br/>
+                                                                <input id="answer2" th:field="*{answer2}" name="answer2" placeholder="Answer #2" type="text"></input><br/><br/><br/>
+                                                                <input id="answer3" th:field="*{answer3}" name="answer3" placeholder="Answer #3" type="text"></input><br/><br/>
 
 
                                                             </div>
-                                                        </form>
+
                                                     </div>
                                                 </div>
                                              </div>

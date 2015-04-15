@@ -22,4 +22,14 @@ public class UserService {
 
         return mrxClient.isMemberInsuranceInTheSystem(insuranceForm);
     }
+
+    public Either<MrxError, Boolean> isEmailAvailable(InsuranceForm insuranceForm) {
+
+        return mrxClient.isEmailAvailable(insuranceForm);
+    }
+
+    public Either<MrxError, Boolean> registerUser(InsuranceForm insuranceForm) {
+
+        return mrxClient.registerUser(insuranceForm);
+    }
 }

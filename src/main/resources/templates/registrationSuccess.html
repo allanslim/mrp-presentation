@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+    <div th:include="header :: header"></div>
+    <style>
+        body {
+        background-image: url("images/background.png");
+        background-size: cover;
+        }
+    </style>
+    <body>
+
+        <div th:include="navigation :: navigation"></div>
+
+        <div class="jumbotron"><h1>ABC Member Portal</h1></div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+
+
+
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-12 col-sm-8 col-md-10 col-sm-offset-1 col-md-offset-1">
+
+
+                        <h2>Member Registration</h2>
+
+
+                        <div class="row">
+
+                            <div class="col-xs-12 col-sm-6 col-md-4" id="registrationForm">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4>Security Questions</h4>
+                                    </div>
+                                    <div class="panel-body">
+
+
+                                        <h1> Thank you for registering. Please check your email to confirm your account. </h1>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                </div>
+            </div>
+        </div>
+
+    </body>
+</html>
