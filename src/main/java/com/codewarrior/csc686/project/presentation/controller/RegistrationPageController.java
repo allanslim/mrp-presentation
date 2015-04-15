@@ -23,6 +23,9 @@ public class RegistrationPageController {
     @Autowired
     private UserService userService;
 
+    @RequestMapping(method = RequestMethod.GET, value = "/registrationSuccess")
+    public String registrationSuccess() { return "registrationSuccess"; }
+
     @RequestMapping(method = RequestMethod.GET, value = "/registration")
     public String registrationForm(InsuranceForm insuranceForm) { return "registration"; }
 
