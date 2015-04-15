@@ -43,85 +43,66 @@
 
                         <h2>Step 2</h2>
                         <label>Please enter your information</label>
-                        <form  th:action="@{/registrationEmail}" th:object="${insuranceForm}" method="POST">
+                        <label id="errorMessageLabel" style="color: red;" th:text="${errorMessage}"> </label>
+                        <form id="registrationEmailForm" th:action="@{/registrationEmail}" th:object="${insuranceForm}" method="POST">
                             <div class="form-register"><label></label>
+
+                                <input class="form-control  input-lg" id="rx_grp_id" name="rx_grp_id"  th:field="*{groupId}" placeholder="Rx Group ID" type="hidden"></input>
+                                <input class="form-control  input-lg" id="member_id" name="member_id"  th:field="*{memberId}" placeholder="Member ID" type="hidden" ></input>
+                                <input class="form-control  input-lg" id="fname" name="first_name"  th:field="*{firstname}"  placeholder="First Name" type="hidden" ></input>
+                                <input class="form-control  input-lg" id="lname" name="last_name"  th:field="*{lastname}" placeholder="Last Name" type="hidden" ></input>
+                                <input class="form-control  input-lg" id="dob" name="date_of_birth"  th:field="*{birthDate}"  placeholder="Date of Birth" type="hidden"></input>
+
                                 <input class="form-control  input-lg" id="email" name="email" placeholder="Email" type="email"></input>
-                                <input class="form-control  input-lg" id="email2" name="email" placeholder="Confirm Email" type="email"></input>
+                                <input class="form-control  input-lg" id="emailConfirmation" name="emailConfirmation" placeholder="Confirm Email" type="email"></input>
                                 <input class="form-control  input-lg" id="password" name="password" placeholder="Password" type="password"></input>
-                                <input class="form-control  input-lg" id="password2" name="password" placeholder="Confirm Password" type="password"></input>
-                                <input id="validate2" name="validate2" value="Validate" type="submit"></input>
+                                <input class="form-control  input-lg" id="passwordConfirmation" name="passwordConfirmation" placeholder="Confirm Password" type="password"></input>
+
                             </div>
                         </form>
                     </div>
-                    <a class="btn btn-default next" href="#">Continue</a>
+                    <a  id="nextButton" class="btn btn-default next" href="#">Continue</a>
                 </div>
             </div>
-            <script>$('.next').click(function(){
+            <script>
+                $('#nextButton').click(function(){
 
-          var nextId = $(this).parents('.tab-pane').next().attr("id");
-          $('[href=#'+nextId+']').tab('show');
-          return false;
 
-        })
+                    if( $('#email').val() != $('#emailConfirmation').val()) {
 
-        $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+                        $('#errorMessageLabel').text("Email does not match.");
+                        return;
+                    }
 
-          //update progress
-          var step = $(e.target).data('step');
-          var percent = (parseInt(step) / 3) * 100;
+                    if( $('#password').val() != $('#passwordConfirmation').val()) {
+                        $('#errorMessageLabel').text("Password does not match.");
+                        return;
+                    }
 
-          $('.progress-bar').css({width: percent + '%'});
-          $('.progress-bar').text("Step " + step + " of 3");
+                    $("#registrationEmailForm").submit();
 
-          //e.relatedTarget // previous tab
+                })
 
-        })
+                $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
 
-        $('.first').click(function(){
+                  //update progress
+                  var step = $(e.target).data('step');
+                  var percent = (parseInt(step) / 3) * 100;
 
-          $('#myWizard a:first').tab('show')
+                  $('.progress-bar').css({width: percent + '%'});
+                  $('.progress-bar').text("Step " + step + " of 3");
 
-        })
+                  //e.relatedTarget // previous tab
+
+                })
+
+                $('.first').click(function(){
+
+                  $('#myWizard a:first').tab('show')
+
+                })
         </script>
-        <!--<div class="container-fluid">
-            <div class="row">
-                <div class="col-xs-12 col-sm-8 col-md-10 col-sm-offset-1 col-md-offset-1">
 
-
-                        <h2>Member Registration</h2>
-
-
-                        <div class="row">
-
-
-
-                            <div class="col-xs-12 col-sm-6 col-md-4" id="emailForm">
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
-                                        <h4>Contact information</h4>
-                                    </div>
-                                    <div class="panel-body">
-
-
-
-                                        <form  th:action="@{/registrationEmail}" th:object="${insuranceForm}" method="POST">
-                                            <div class="form-register"><label></label>
-                                                <input id="email" name="email" placeholder="Email" type="email"></input><br/><br/>
-                                                <input id="email2" name="email" placeholder="Confirm Email" type="email"></input><br/><br/>
-                                                <input id="password" name="password" placeholder="Password" type="password"></input><br/><br/>
-                                                <input id="password2" name="password" placeholder="Confirm Password" type="password"></input><br/><br/>
-
-                                                <input id="validate2" name="validate2" value="Validate" type="submit"></input></div>
-                                        </form>
-
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                </div>
-            </div>-->
         </div>
 
     </body>
