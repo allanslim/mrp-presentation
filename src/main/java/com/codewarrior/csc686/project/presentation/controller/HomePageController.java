@@ -90,27 +90,29 @@ public class HomePageController extends BaseController {
     public String about(HttpServletRequest request,  Model model) {
         createDefaultSignInOutLink(model);
 
-        model.addAttribute("greeting", "Hello Allan");
-
-        if (isTokenValid(request)) {
-            createSignInOutLink(model, "Sign Out", "/signOut");
-            return "about";
-        }
-
-        return "redirect:/";
+//        model.addAttribute("greeting", "Hello Allan");
+//
+//        if (isTokenValid(request)) {
+//            createSignInOutLink(model, "Sign Out", "/signOut");
+//            return "about";
+//        }
+//
+//        return "redirect:/";
+        return "about";
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/contactUs")
     public String contactUs(HttpServletRequest request,  Model model) {
 
         createDefaultSignInOutLink(model);
-
-        if (isTokenValid(request)) {
-            createSignInOutLink(model, "Sign Out", "/signOut");
-            return "contactUs";
-        }
-
-        return "redirect:/";
+//
+//        if (isTokenValid(request)) {
+//            createSignInOutLink(model, "Sign Out", "/signOut");
+//            return "contactUs";
+//        }
+//
+//        return "redirect:/";
+        return "contactUs";
     }
 
     private boolean isTokenValid(HttpServletRequest request) {
