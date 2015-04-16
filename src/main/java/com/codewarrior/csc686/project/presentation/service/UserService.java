@@ -4,8 +4,11 @@ import com.codewarrior.csc686.project.presentation.client.MrxClient;
 import com.codewarrior.csc686.project.presentation.model.InsuranceForm;
 import com.codewarrior.csc686.project.presentation.util.Either;
 import com.codewarrior.csc686.project.presentation.util.MrxError;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -16,7 +19,7 @@ public class UserService {
 
     public Either<MrxError, String> login(String email, String password) { return  mrxClient.login(email, password); }
 
-    public boolean validateToken(String token) { return mrxClient.getToken(token) == null? false : true;  }
+    public boolean validateToken(String token) { return StringUtils.isBlank(mrxClient.getToken(token))? false : true;  }
 
     public Either<MrxError, Boolean> isMemberInsuranceInTheSystem(InsuranceForm insuranceForm) {
 
@@ -31,5 +34,11 @@ public class UserService {
     public Either<MrxError, Boolean> registerUser(InsuranceForm insuranceForm) {
 
         return mrxClient.registerUser(insuranceForm);
+    }
+
+    public Either<MrxError, Boolean> logout(String token) {
+
+        return mrxClient.logout(token);
+
     }
 }

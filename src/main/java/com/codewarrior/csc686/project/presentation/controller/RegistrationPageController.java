@@ -5,7 +5,6 @@ import com.codewarrior.csc686.project.presentation.model.InsuranceForm;
 import com.codewarrior.csc686.project.presentation.service.UserService;
 import com.codewarrior.csc686.project.presentation.util.Either;
 import com.codewarrior.csc686.project.presentation.util.MrxError;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,16 +17,23 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 @Controller
-public class RegistrationPageController {
+public class RegistrationPageController extends BaseController {
 
     @Autowired
     private UserService userService;
 
     @RequestMapping(method = RequestMethod.GET, value = "/registrationSuccess")
-    public String registrationSuccess() { return "registrationSuccess"; }
+    public String registrationSuccess(Model model) {
+        createDefaultSignInOutLink(model);
+        return "registrationSuccess";
+    }
 
     @RequestMapping(method = RequestMethod.GET, value = "/registration")
-    public String registrationForm(InsuranceForm insuranceForm) { return "registration"; }
+    public String registrationForm(InsuranceForm insuranceForm, Model model) {
+        createDefaultSignInOutLink(model);
+        return "registration";
+    }
+
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/registration")
@@ -48,12 +54,17 @@ public class RegistrationPageController {
         MrxError mrxError = isInsuranceInTheSystem.left();
         model.addAttribute("errorMessage", mrxError.getErrorMessage());
 
+        createDefaultSignInOutLink(model);
+
         return "registration";
     }
 
 
     @RequestMapping(method = RequestMethod.GET, value = "/registrationEmail")
-    public String registrationEmailAccount(InsuranceForm insuranceForm) { return "registrationEmail"; }
+    public String registrationEmailAccount(InsuranceForm insuranceForm, Model model) {
+        createDefaultSignInOutLink(model);
+        return "registrationEmail";
+    }
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/registrationEmail")
@@ -74,13 +85,15 @@ public class RegistrationPageController {
         MrxError mrxError = isEmailAvailable.left();
         model.addAttribute("errorMessage", mrxError.getErrorMessage());
 
+        createDefaultSignInOutLink(model);
         return "registrationEmail";
     }
 
 
     @RequestMapping(method = RequestMethod.GET, value = "/registrationFinal")
-    public String registrationFinal(InsuranceForm insuranceForm) {
+    public String registrationFinal(InsuranceForm insuranceForm, Model model) {
 
+        createDefaultSignInOutLink(model);
         return "registrationFinal";
     }
 
@@ -103,6 +116,7 @@ public class RegistrationPageController {
         MrxError mrxError = isEmailAvailable.left();
         model.addAttribute("errorMessage", mrxError.getErrorMessage());
 
+        createDefaultSignInOutLink(model);
         return "registrationFinal";
     }
 }
