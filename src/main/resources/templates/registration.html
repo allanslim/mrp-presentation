@@ -39,9 +39,9 @@
     <div class="navbar">
         <div class="navbar-inner">
             <ul class="nav nav-pills">
-                <li class="active"><a href="#step1" data-toggle="tab" data-step="1">Step 1</a></li>
-                <li><a href="#step2" data-toggle="tab" data-step="2">Step 2</a></li>
-                <li><a href="#step3" data-toggle="tab" data-step="3">Step 3</a></li>
+                <li class="active"><a href="#step1"  data-step="1">Step 1</a></li>
+                <li><a href="#step2"  data-step="2">Step 2</a></li>
+                <li><a href="#step3"  data-step="3">Step 3</a></li>
             </ul>
         </div>
     </div>
@@ -59,106 +59,19 @@
                             <input class="form-control  input-lg" id="lname" name="last_name"  th:field="*{lastname}" placeholder="Last Name" type="text" ></input>
                             <input class="form-control  input-lg" id="dob" name="date_of_birth"  th:field="*{birthDate}"  placeholder="Date of Birth" type="date"></input>
 
-                            <input id="validate" name="validate" value="Validate" type="submit"></input>
+                            <br></br>
+                            <input class="btn btn-default" id="validate" name="validate" value="Validate" type="submit"></input>
                         </div>
                     </form>
-
                 </div>
             </div>
-                    <!--<a class="btn btn-default btn-lg next" href="#">Continue</a> next" href="#">Continue</a>-->
-
-        <div class="tab-pane fade" id="step2">
-            <div class="well">
-
-                <h2>Step 2</h2>
-                <label>Please enter your information</label>
-                <input class="form-control  input-lg" type="email" placeholder="Email"></input>
-                <input class="form-control  input-lg" type="email" placeholder="Confirm Email"></input>
-                <input class="form-control  input-lg" type="password" placeholder="Password"></input>
-                <input class="form-control  input-lg" type="password" placeholder="Confirm Password"></input>
-
-            </div>
-            <a class="btn btn-default next" href="#">Continue</a>
-        </div>
-        <div class="tab-pane fade" id="step3">
-            <div class="well">
-                <h2>Step 3</h2>
-                <label>Security Question 1</label>
-                <select class="form-control input-lg">
-                    <option value="What was the name of your first pet?">What was the name of your first pet?</option>
-                    <option value="Where did you first attend school?">Where did you first attend school?</option>
-                    <option value="What is your mother's maiden name?">What is your mother's maiden name?</option>
-                    <option value="What is your favorite car model?">What is your favorite car model?</option>
-                </select>
-                <br></br>
-                <label>Enter Response</label>
-                <input class="form-control input-lg"></input>
-
-                <label>Security Question 2</label>
-                <select class="form-control input-lg">
-                    <option value="What was the name of your first pet?">What was the name of your first pet?</option>
-                    <option value="Where did you first attend school?">Where did you first attend school?</option>
-                    <option value="What is your mother's maiden name?">What is your mother's maiden name?</option>
-                    <option value="What is your favorite car model?">What is your favorite car model?</option>
-                </select>
-                <br></br>
-                <label>Enter Response</label>
-                <input class="form-control input-lg"></input>
-
-                <label>Security Question 3</label>
-                <select class="form-control input-lg">
-                    <option value="What was the name of your first pet?">What was the name of your first pet?</option>
-                    <option value="Where did you first attend school?">Where did you first attend school?</option>
-                    <option value="What is your mother's maiden name?">What is your mother's maiden name?</option>
-                    <option value="What is your favorite car model?">What is your favorite car model?</option>
-                </select>
-                <br></br>
-                <label>Enter Response</label>
-                <input class="form-control input-lg"></input>
-            </div>
-            <a class="btn btn-success first" href="#">Submit</a>
-        </div>
-
     <hr></hr>
 
     <a href="/terms?">Terms of Use</a>
 
     <hr></hr>
-
     </div>
 </div>
-<script>
-    $('.next').click(function(){
-
-          var nextId = $(this).parents('.tab-pane').next().attr("id");
-          $('[href=#'+nextId+']').tab('show');
-          return false;
-
-        })
-
-        $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-
-          //update progress
-          var step = $(e.target).data('step');
-          var percent = (parseInt(step) / 3) * 100;
-
-          $('.progress-bar').css({width: percent + '%'});
-          $('.progress-bar').text("Step " + step + " of 3");
-
-          //e.relatedTarget // previous tab
-
-        })
-
-        $('.first').click(function(){
-
-          $('#myWizard a:first').tab('show')
-
-        })
-        </script>
-
-
-
-
 </body>
 </html>
 

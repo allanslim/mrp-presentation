@@ -19,7 +19,7 @@ import javax.validation.Valid;
 import java.util.Optional;
 
 @Controller
-public class HomePageController {
+public class HomePageController extends BaseController {
 
     @Autowired
     private UserService userService;
@@ -80,16 +80,7 @@ public class HomePageController {
         return "redirect:/";
     }
 
-    private void createSignInOutLink(Model model, String label, String link) {
-        SignInOutLink signInOutLink = new SignInOutLink();
-        signInOutLink.label = label;
-        signInOutLink.link = link;
-        model.addAttribute("signInOutLink", signInOutLink);
-    }
 
-    private void createDefaultSignInOutLink(Model model) {
-        createSignInOutLink(model, "Sign In", "/");
-    }
 
     @RequestMapping(method = RequestMethod.GET, value = "/about")
     public String about(HttpServletRequest request,  Model model) {

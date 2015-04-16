@@ -31,9 +31,9 @@
             <div class="navbar">
                 <div class="navbar-inner">
                     <ul class="nav nav-pills">
-                        <li><a href="#step1" data-toggle="tab" data-step="1">Step 1</a></li>
-                        <li class="active"><a href="#step2" data-toggle="tab" data-step="2">Step 2</a></li>
-                        <li><a href="#step3" data-toggle="tab" data-step="3">Step 3</a></li>
+                        <li><a href="#step1"  data-step="1">Step 1</a></li>
+                        <li class="active"><a href="#step2"  data-step="2">Step 2</a></li>
+                        <li><a href="#step3"  data-step="3">Step 3</a></li>
                     </ul>
                 </div>
             </div>
@@ -64,15 +64,13 @@
                     <a  id="nextButton" class="btn btn-default next" href="#">Continue</a>
                 </div>
             </div>
-            <script>
-                $('#nextButton').click(function(){
-
+            <script>$('#nextButton').click(function(){
 
                     if( $('#email').val() != $('#emailConfirmation').val()) {
-
                         $('#errorMessageLabel').text("Email does not match.");
                         return;
                     }
+
 
                     if( $('#password').val() != $('#passwordConfirmation').val()) {
                         $('#errorMessageLabel').text("Password does not match.");
@@ -98,9 +96,10 @@
 
                 $('.first').click(function(){
 
-                  $('#myWizard a:first').tab('show')
+                $('#myWizard a:first').tab('show')
 
                 })
+
         </script>
 
         </div>
