@@ -1,6 +1,7 @@
 package com.codewarrior.csc686.project.presentation.controller;
 
 import com.codewarrior.csc686.project.presentation.model.LoginCredential;
+import com.codewarrior.csc686.project.presentation.model.SignInOutLink;
 import com.codewarrior.csc686.project.presentation.service.UserService;
 import com.codewarrior.csc686.project.presentation.util.Either;
 import com.codewarrior.csc686.project.presentation.util.MrxError;
@@ -24,8 +25,23 @@ public class HomePageController {
     private UserService userService;
 
     @RequestMapping(method = RequestMethod.GET, value = "/")
-    public String index(LoginCredential loginCredential) { return "index"; }
+    public String index(LoginCredential loginCredential, Model model) {
+        createDefaultSignInOutLink(model);
+        return "index";
+    }
 
+    @RequestMapping(method = RequestMethod.GET, value = "/signOut")
+    public String logout( HttpServletRequest request, Model model) {
+
+        Either<MrxError, Boolean> logout = userService.logout(extractToken(request).get());
+
+        if(logout.isRight()) {
+            removeTokenFromCookie(request);
+        }
+
+        createDefaultSignInOutLink(model);
+        return "redirect:/";
+    }
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/")
@@ -38,7 +54,7 @@ public class HomePageController {
         Either<MrxError, String> eitherToken = userService.login(loginCredential.getEmail(), loginCredential.getPassword());
 
         if (eitherToken.isRight()) {
-
+            createSignInOutLink(model, "Sign Out", "/signOut");
             response.addCookie(new Cookie("token", eitherToken.right()));
             return "home";
         }
@@ -53,23 +69,36 @@ public class HomePageController {
 
 
     @RequestMapping(method = RequestMethod.GET, value = "/home")
-    public String home(HttpServletRequest request, HttpServletResponse response, Model model) {
+    public String home(HttpServletRequest request,  Model model) {
 
-        if (isTokenValid(request, response)) {
+        if (isTokenValid(request)) {
+            createSignInOutLink(model, "Sign Out", "/signOut");
+
             return "home";
         }
 
         return "redirect:/";
     }
 
+    private void createSignInOutLink(Model model, String label, String link) {
+        SignInOutLink signInOutLink = new SignInOutLink();
+        signInOutLink.label = label;
+        signInOutLink.link = link;
+        model.addAttribute("signInOutLink", signInOutLink);
+    }
+
+    private void createDefaultSignInOutLink(Model model) {
+        createSignInOutLink(model, "Sign In", "/");
+    }
 
     @RequestMapping(method = RequestMethod.GET, value = "/about")
-    public String about(HttpServletRequest request, HttpServletResponse response, Model model) {
+    public String about(HttpServletRequest request,  Model model) {
 
 
         model.addAttribute("greeting", "Hello Allan");
 
-        if (isTokenValid(request, response)) {
+        if (isTokenValid(request)) {
+            createSignInOutLink(model, "Sign Out", "/signOut");
             return "about";
         }
 
@@ -77,25 +106,26 @@ public class HomePageController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/contactUs")
-    public String contactUs(HttpServletRequest request, HttpServletResponse response, Model model) {
+    public String contactUs(HttpServletRequest request,  Model model) {
 
         model.addAttribute("greeting", "Hello Allan");
 
-        if (isTokenValid(request, response)) {
+        if (isTokenValid(request)) {
+            createSignInOutLink(model, "Sign Out", "/signOut");
             return "contactUs";
         }
 
         return "redirect:/";
     }
 
-    private boolean isTokenValid(HttpServletRequest request, HttpServletResponse response) {
+    private boolean isTokenValid(HttpServletRequest request) {
 
-        Optional<String> optionalToken = extractToken(request, response);
+        Optional<String> optionalToken = extractToken(request);
 
         return optionalToken.isPresent() ? userService.validateToken(optionalToken.get()) : false;
     }
 
-    private Optional<String> extractToken(HttpServletRequest request, HttpServletResponse response) {
+    private Optional<String> extractToken(HttpServletRequest request) {
 
         Cookie[] cookies = request.getCookies();
 
@@ -107,5 +137,19 @@ public class HomePageController {
             }
         }
         return Optional.empty();
+    }
+
+
+    private void removeTokenFromCookie(HttpServletRequest request) {
+        Cookie[] cookies = request.getCookies();
+
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("token")) {
+                    cookie.setValue("");
+                    cookie.setMaxAge(0);
+                }
+            }
+        }
     }
 }

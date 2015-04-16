@@ -30,7 +30,7 @@ public class MrxClient extends BaseClient {
 
 
 
-    //curl -i "http://localhost:9595/mrxuser/token/O5HVOAEXG2K32CAKMNMHMXOOYEQOG3TM3FAQLMTD45G0TLZ7IF"
+    //curl -i "http://localhost:9595/mrxuser/token/1WACSNQD9O51MVBAV7XNOFM4AGLOOVM24S5GW1D80W2VHYA2FW"
     public String getToken( String token) {
 
         HttpEntity<String> entity = createHttpEntity();
@@ -42,6 +42,34 @@ public class MrxClient extends BaseClient {
         return (String) responseEntity.getBody().get("token");
 
     }
+
+
+    public Either<MrxError, Boolean> logout( String token ) {
+
+        HttpEntity<String> entity = createHttpEntity();
+
+        RestTemplate restTemplate = createRestTemplate();
+
+        try {
+            ResponseEntity<Map> responseEntity = restTemplate.exchange(middleTierHost + "/mrxuser/logout/" + token, HttpMethod.GET, entity, Map.class);
+
+            Map<String, String> responseBody = responseEntity.getBody();
+
+            if (responseEntity.getStatusCode() == HttpStatus.OK) {
+                return Either.right( Boolean.valueOf(responseBody.get("isLogOutSuccessful")));
+            }
+
+
+        } catch (HttpClientErrorException e) {
+            LOG.error(e.getResponseBodyAsString(), e);
+            return Either.left(new MrxError(e.getStatusCode().toString(), "Invalid Credentials"));
+
+        }
+
+        return Either.left(new MrxError("Generic Error", "Generic Error"));
+
+    }
+
 
     // curl -i -XPOST "http://ec2-54-145-194-211.compute-1.amazonaws.com/user/login?email=chong@lee.com&password=abc123"
     public Either<MrxError, String> login(String email, String password) {
@@ -93,7 +121,7 @@ public class MrxClient extends BaseClient {
 
 
     public Either<MrxError,Boolean> registerUser(InsuranceForm insuranceForm) {
-        return validateAccount("/user/registration", "isRegistrationSuccessful","Email account already exist in the system.", insuranceForm);
+        return validateAccount("/user/registration", "isRegistrationSuccessful", "Email account already exist in the system.", insuranceForm);
     }
 
 

@@ -27,6 +27,12 @@ public class RegistrationPageController {
     public String registrationForm(InsuranceForm insuranceForm) { return "registration"; }
 
 
+
+    @RequestMapping(method = RequestMethod.GET, value = "/registrationSuccess")
+    public String registrationSuccess() { return "registrationSuccess"; }
+
+
+
     @RequestMapping(method = RequestMethod.POST, value = "/registration")
     public String registerInsuranceForm(HttpServletRequest request, HttpServletResponse response, @Valid InsuranceForm insuranceForm, BindingResult bindingResult, Model model) {
 

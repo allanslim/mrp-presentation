@@ -127,7 +127,8 @@
 
     </div>
 </div>
-<script>$('.next').click(function(){
+<script>
+    $('.next').click(function(){
 
           var nextId = $(this).parents('.tab-pane').next().attr("id");
           $('[href=#'+nextId+']').tab('show');
