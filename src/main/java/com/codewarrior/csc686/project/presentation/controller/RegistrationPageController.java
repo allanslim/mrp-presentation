@@ -39,6 +39,8 @@ public class RegistrationPageController extends BaseController {
     @RequestMapping(method = RequestMethod.POST, value = "/registration")
     public String registerInsuranceForm(HttpServletRequest request, HttpServletResponse response, @Valid InsuranceForm insuranceForm, BindingResult bindingResult, Model model) {
 
+        createDefaultSignInOutLink(model);
+
         if (bindingResult.hasErrors()) {
             model.addAttribute("errorMessage", "All fields are required.");
             return "registration";
@@ -54,8 +56,6 @@ public class RegistrationPageController extends BaseController {
         MrxError mrxError = isInsuranceInTheSystem.left();
         model.addAttribute("errorMessage", mrxError.getErrorMessage());
 
-        createDefaultSignInOutLink(model);
-
         return "registration";
     }
 
@@ -69,6 +69,8 @@ public class RegistrationPageController extends BaseController {
 
     @RequestMapping(method = RequestMethod.POST, value = "/registrationEmail")
     public String validateEmailAccount(HttpServletRequest request, HttpServletResponse response, @Valid InsuranceForm insuranceForm, BindingResult bindingResult, Model model) {
+
+        createDefaultSignInOutLink(model);
 
         if (!insuranceForm.isEmailAndPasswordSupplied()) {
             model.addAttribute("errorMessage", "All fields are required.");
@@ -85,7 +87,7 @@ public class RegistrationPageController extends BaseController {
         MrxError mrxError = isEmailAvailable.left();
         model.addAttribute("errorMessage", mrxError.getErrorMessage());
 
-        createDefaultSignInOutLink(model);
+
         return "registrationEmail";
     }
 
@@ -100,6 +102,8 @@ public class RegistrationPageController extends BaseController {
 
     @RequestMapping(method = RequestMethod.POST, value = "/registrationFinal")
     public String registerUser(HttpServletRequest request, HttpServletResponse response, @Valid InsuranceForm insuranceForm, BindingResult bindingResult, Model model) {
+
+        createDefaultSignInOutLink(model);
 
         if (!insuranceForm.areQuestionsAndAnswersSupplied()) {
             model.addAttribute("errorMessage", "All fields are required.");
@@ -116,7 +120,6 @@ public class RegistrationPageController extends BaseController {
         MrxError mrxError = isEmailAvailable.left();
         model.addAttribute("errorMessage", mrxError.getErrorMessage());
 
-        createDefaultSignInOutLink(model);
         return "registrationFinal";
     }
 }

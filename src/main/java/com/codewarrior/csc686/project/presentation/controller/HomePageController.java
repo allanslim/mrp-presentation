@@ -33,19 +33,22 @@ public class HomePageController extends BaseController {
     @RequestMapping(method = RequestMethod.GET, value = "/signOut")
     public String logout( HttpServletRequest request, Model model) {
 
+        createDefaultSignInOutLink(model);
+
         Either<MrxError, Boolean> logout = userService.logout(extractToken(request).get());
 
         if(logout.isRight()) {
             removeTokenFromCookie(request);
         }
 
-        createDefaultSignInOutLink(model);
         return "redirect:/";
     }
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/")
     public String login(HttpServletRequest request, HttpServletResponse response, @Valid LoginCredential loginCredential, BindingResult bindingResult, Model model) {
+
+        createDefaultSignInOutLink(model);
 
         if (bindingResult.hasErrors()) {
             return "index";
@@ -70,6 +73,7 @@ public class HomePageController extends BaseController {
 
     @RequestMapping(method = RequestMethod.GET, value = "/home")
     public String home(HttpServletRequest request,  Model model) {
+        createDefaultSignInOutLink(model);
 
         if (isTokenValid(request)) {
             createSignInOutLink(model, "Sign Out", "/signOut");
@@ -84,7 +88,7 @@ public class HomePageController extends BaseController {
 
     @RequestMapping(method = RequestMethod.GET, value = "/about")
     public String about(HttpServletRequest request,  Model model) {
-
+        createDefaultSignInOutLink(model);
 
         model.addAttribute("greeting", "Hello Allan");
 
@@ -99,7 +103,7 @@ public class HomePageController extends BaseController {
     @RequestMapping(method = RequestMethod.GET, value = "/contactUs")
     public String contactUs(HttpServletRequest request,  Model model) {
 
-        model.addAttribute("greeting", "Hello Allan");
+        createDefaultSignInOutLink(model);
 
         if (isTokenValid(request)) {
             createSignInOutLink(model, "Sign Out", "/signOut");
