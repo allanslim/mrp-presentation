@@ -46,9 +46,9 @@
                                 <div class="panel-heading">
                                     <h2>Welcome</h2>
                                 </div>
-                                <div class="text-center">Member ID: ***insert number***</div>
-                                <div class="text-center">Rx Group ID: ***insert number***</div>
-                                <div class="text-center">Plan Name: ***insert name***</div>
+                                <div class="text-center">Member ID: <span th:text="${insuranceId}"></span></div>
+                                <div class="text-center">Rx Group ID: <span th:text="${groupId}"></span></div>
+                                <div class="text-center">Plan Name: <span th:text="${planName}"></span></div>
                                 <div class="divider"></div>
                                 <table class="table table-bordered">
                                     <thead>
@@ -164,118 +164,17 @@
                 <div class="Claim">
                     <div class="row">
 
-                            <div class="panel panel-justified">
-                                <div class="panel-heading">
+                        <div class="panel panel-justified">
+                            <div class="panel-heading">
 
-                                    <h2>Welcome ***</h2>
-                                </div>
-                                    <div class="col-sm-6 col-md-6">
-                                        <div class="padded-multiline">
-                                            <div class="text-left">Member ID: ***insert number***</div>
-                                            <div class="text-left">Rx Group ID: ***insert number***</div>
-                                            <div class="text-left">Plan Name: ***insert name***</div>
-                                            <div class="divider"></div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6 col-md-6">
-                                        <form role="form" class="form-horizontal">
-                                            <fieldset>
-                                                <div class="form-group">
-                                                    <label class="col-sm-2 control-label">Select Member:</label>
-                                                    <div class="col-sm-3">
-                                                        <select class="form-control">
-                                                            <option value="1">1</option>
-                                                            <option value="2">2</option>
-                                                            <option value="3">3</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </fieldset>
-                                        </form>
-                                        <form role="form" class="form-horizontal">
-                                            <fieldset>
-                                                <div class="form-group">
-                                                    <label class="col-sm-2 control-label">Select Time Period:</label>
-                                                    <div class="col-sm-3">
-                                                        <select class="form-control">
-                                                            <option value="3 Months">3 Months</option>
-                                                            <option value="6 Months">6 Months</option>
-                                                            <option value="12 Months">12 Months</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </fieldset>
-                                        </form>
-                                        </div>
-                                <table class="table table-bordered">
-                                    <thead>
-                                    <tr class="active">
-                                        <th> </th>
-                                        <th>RX# </th>
-                                        <th>Date Filled</th>
-                                        <th>Drug Name</th>
-                                        <th>Member Paid</th>
-                                        <th>Pharmacy</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td>4</td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                    </tbody>
-                                </table>
+                                <h2>Welcome ***</h2>
                             </div>
-                        </div>
-                    </div>
-                </div>
-            <div id="Drug" class="tab-pane">
-                <div class="text-center">
-                    <h1>Drug Price Lookup</h1>
-                </div>
-                <div class="Drug">
-                    <div class="panel panel-justified">
-
-                        <div class="panel-heading">
-                            <h2>Welcome ***</h2>
-                        </div>
-                        <div class="row">
-                            <div class="panel-body">
                             <div class="col-sm-6 col-md-6">
                                 <div class="padded-multiline">
                                     <div class="text-left">Member ID: ***insert number***</div>
                                     <div class="text-left">Rx Group ID: ***insert number***</div>
                                     <div class="text-left">Plan Name: ***insert name***</div>
                                     <div class="divider"></div>
-                                    <hr></hr>
                                 </div>
                             </div>
                             <div class="col-sm-6 col-md-6">
@@ -293,52 +192,153 @@
                                         </div>
                                     </fieldset>
                                 </form>
+                                <form role="form" class="form-horizontal">
+                                    <fieldset>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">Select Time Period:</label>
+                                            <div class="col-sm-3">
+                                                <select class="form-control">
+                                                    <option value="3 Months">3 Months</option>
+                                                    <option value="6 Months">6 Months</option>
+                                                    <option value="12 Months">12 Months</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </form>
                             </div>
+                            <table class="table table-bordered">
+                                <thead>
+                                <tr class="active">
+                                    <th> </th>
+                                    <th>RX# </th>
+                                    <th>Date Filled</th>
+                                    <th>Drug Name</th>
+                                    <th>Member Paid</th>
+                                    <th>Pharmacy</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                </tbody>
+                            </table>
                         </div>
-                    <div class="row">
-                        <div class="col-sm-6 col-md-6">
-                            <form role="form" class="form-horizontal">
-                                <fieldset>
-                                    <div class="form-group">
-                                        <label class="col-sm-4 control-label">Enter Drug Name:</label>
-                                        <div class="col-sm-5">
-                                            <input type="text" class="form-control input-lg" placeholder="Example: Ibuprofen"></input>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-4 control-label">Select a Form and Strength:</label>
-                                        <div class="col-sm-5">
-                                            <select class="form-control input-lg">
-                                                <option value="1">1</option>
-                                                <option value="2">2</option>
-                                                <option value="3">3</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-4 control-label">Select Dosage:</label>
-                                        <div class="col-sm-5">
-                                            <select class="form-control input-lg">
-                                                <option value="1">1</option>
-                                                <option value="2">2</option>
-                                                <option value="3">3</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-8">
-                                    <a href="#" class="btn btn-lg btn-primary pull-right"
-                                       data-toggle="modal"
-                                       data-target="#basicModal">Look Up Price</a>
-                                    </div>
-                                </fieldset>
-                            </form>
-                        </div>
-                        <textarea rows="15" cols="50">This might be a good way to display the info from DB. Let me know if you have a better idea</textarea>
                     </div>
-                        </div>
                 </div>
             </div>
-        </div>
+            <div id="Drug" class="tab-pane">
+                <div class="text-center">
+                    <h1>Drug Price Lookup</h1>
+                </div>
+                <div class="Drug">
+                    <div class="panel panel-justified">
+
+                        <div class="panel-heading">
+                            <h2>Welcome ***</h2>
+                        </div>
+                        <div class="row">
+                            <div class="panel-body">
+                                <div class="col-sm-6 col-md-6">
+                                    <div class="padded-multiline">
+                                        <div class="text-left">Member ID: ***insert number***</div>
+                                        <div class="text-left">Rx Group ID: ***insert number***</div>
+                                        <div class="text-left">Plan Name: ***insert name***</div>
+                                        <div class="divider"></div>
+                                        <hr></hr>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-md-6">
+                                    <form role="form" class="form-horizontal">
+                                        <fieldset>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">Select Member:</label>
+                                                <div class="col-sm-3">
+                                                    <select class="form-control">
+                                                        <option value="1">1</option>
+                                                        <option value="2">2</option>
+                                                        <option value="3">3</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6 col-md-6">
+                                    <form role="form" class="form-horizontal">
+                                        <fieldset>
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label">Enter Drug Name:</label>
+                                                <div class="col-sm-5">
+                                                    <input type="text" class="form-control input-lg" placeholder="Example: Ibuprofen"></input>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label">Select a Form and Strength:</label>
+                                                <div class="col-sm-5">
+                                                    <select class="form-control input-lg">
+                                                        <option value="1">1</option>
+                                                        <option value="2">2</option>
+                                                        <option value="3">3</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label">Select Dosage:</label>
+                                                <div class="col-sm-5">
+                                                    <select class="form-control input-lg">
+                                                        <option value="1">1</option>
+                                                        <option value="2">2</option>
+                                                        <option value="3">3</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <a href="#" class="btn btn-lg btn-primary pull-right"
+                                                   data-toggle="modal"
+                                                   data-target="#basicModal">Look Up Price</a>
+                                            </div>
+                                        </fieldset>
+                                    </form>
+                                </div>
+                                <textarea rows="15" cols="50">This might be a good way to display the info from DB. Let me know if you have a better idea</textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div id="Locate" class="tab-pane">
                 <div class="text-center">
                     <h1>Locate a Pharmacy</h1>

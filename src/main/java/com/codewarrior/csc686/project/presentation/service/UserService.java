@@ -8,6 +8,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -40,5 +41,13 @@ public class UserService {
 
         return mrxClient.logout(token);
 
+    }
+
+    public Either<MrxError,Map<String,String>> retrieveWelcomeSummary(String token) {
+        return mrxClient.retrieveWelcomeSummary(token);
+    }
+
+    public Either<MrxError,Map<String,String>> retrieveAnnualBenefits(String token) {
+        return mrxClient.retrieveAnnualBenefits(token);
     }
 }

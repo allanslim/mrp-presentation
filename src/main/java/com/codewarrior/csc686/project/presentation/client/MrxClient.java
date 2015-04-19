@@ -125,6 +125,45 @@ public class MrxClient extends BaseClient {
     }
 
 
+    public Either<MrxError, Map<String, String>> retrieveAnnualBenefits(String token) {
+
+        return retrieveDataFromRest(middleTierHost + "/mrxuser/annualBenefits/" + token );
+    }
+
+    public Either<MrxError, Map<String, String>> retrieveWelcomeSummary(String token) {
+
+        return retrieveDataFromRest(middleTierHost + "/mrxuser/memberInfo/" + token );
+    }
+
+
+
+    public Either<MrxError, Map<String, String>> retrieveDataFromRest(String url) {
+
+        RestTemplate restTemplate = createRestTemplate();
+
+        HttpEntity<String> entity = createHttpEntity();
+
+        try {
+            ResponseEntity<Map> responseEntity = restTemplate.exchange(url, HttpMethod.GET, entity, Map.class);
+
+            Map<String, String> responseBody = responseEntity.getBody();
+
+            if (responseEntity.getStatusCode() == HttpStatus.OK) {
+                return Either.right(responseBody);
+            }
+
+        } catch (HttpClientErrorException e) {
+            LOG.error(e.getResponseBodyAsString(), e);
+            return Either.left(new MrxError(e.getStatusCode().toString(), "Invalid Credentials"));
+
+        }
+
+        return Either.left(new MrxError("Generic Error", "Generic Error"));
+    }
+
+
+
+
     private Either<MrxError, Boolean> validateAccount(String url, String labelName, String errorMessage, InsuranceForm insuranceForm) {
 
         RegisterUserInput registerUserInput = createRegisterUserInput(insuranceForm);

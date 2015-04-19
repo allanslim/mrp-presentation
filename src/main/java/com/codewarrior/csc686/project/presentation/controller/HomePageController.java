@@ -16,6 +16,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import java.util.Map;
 import java.util.Optional;
 
 @Controller
@@ -84,34 +85,53 @@ public class HomePageController extends BaseController {
         return "redirect:/";
     }
 
-
-
     @RequestMapping(method = RequestMethod.GET, value = "/about")
     public String about(HttpServletRequest request,  Model model) {
         createDefaultSignInOutLink(model);
 
-//        model.addAttribute("greeting", "Hello Allan");
-//
-//        if (isTokenValid(request)) {
-//            createSignInOutLink(model, "Sign Out", "/signOut");
-//            return "about";
-//        }
-//
-//        return "redirect:/";
         return "about";
     }
 
+
+    @RequestMapping(method = RequestMethod.GET, value = "/portal")
+    public String portal(HttpServletRequest request,  Model model) {
+        createDefaultSignInOutLink(model);
+
+        model.addAttribute("greeting", "Hello Allan");
+
+        if (isTokenValid(request)) {
+            createSignInOutLink(model, "Sign Out", "/signOut");
+
+            Optional<String> optionalToken = extractToken(request);
+
+            if(optionalToken.isPresent()) {
+                Either<MrxError, Map<String, String>> welcomeSummary = userService.retrieveWelcomeSummary(optionalToken.get());
+                Either<MrxError, Map<String, String>> annualBenefits = userService.retrieveAnnualBenefits(optionalToken.get());
+
+
+                if(welcomeSummary.isRight()) {
+                    Map<String, String> welcomeSummaryMap = welcomeSummary.right();
+                    model.addAllAttributes(welcomeSummaryMap);
+                }
+
+                if(annualBenefits.isRight()) {
+                    Map<String, String> annualBenefitsMap = annualBenefits.right();
+                    model.addAllAttributes(annualBenefitsMap);
+                }
+
+            }
+
+            return "portal";
+        }
+
+        return "redirect:/";
+    }
+
     @RequestMapping(method = RequestMethod.GET, value = "/contactUs")
-    public String contactUs(HttpServletRequest request,  Model model) {
+    public String contactUs( Model model) {
 
         createDefaultSignInOutLink(model);
-//
-//        if (isTokenValid(request)) {
-//            createSignInOutLink(model, "Sign Out", "/signOut");
-//            return "contactUs";
-//        }
-//
-//        return "redirect:/";
+
         return "contactUs";
     }
 
