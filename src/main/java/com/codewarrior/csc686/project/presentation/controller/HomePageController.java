@@ -1,6 +1,8 @@
 package com.codewarrior.csc686.project.presentation.controller;
 
+import com.codewarrior.csc686.project.presentation.model.Dependent;
 import com.codewarrior.csc686.project.presentation.model.LoginCredential;
+import com.codewarrior.csc686.project.presentation.model.PrescriptionHistory;
 import com.codewarrior.csc686.project.presentation.model.SignInOutLink;
 import com.codewarrior.csc686.project.presentation.service.UserService;
 import com.codewarrior.csc686.project.presentation.util.Either;
@@ -11,11 +13,15 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -92,6 +98,19 @@ public class HomePageController extends BaseController {
         return "about";
     }
 
+    @RequestMapping(method = RequestMethod.GET, value = "/prescriptionHistory")
+    @ResponseBody
+    public List<PrescriptionHistory> retrievePrescriptionHistory( @RequestParam(value = "token") String token,
+                                                                  @RequestParam(value = "mrbId") String mrbId,
+                                                                  @RequestParam(value = "period") int period) {
+
+        Either<MrxError, List<PrescriptionHistory>> mrxErrorListEither = userService.retrievePrescriptionHistory(token, mrbId, period);
+
+        if(mrxErrorListEither.isRight()) {
+            return mrxErrorListEither.right();
+        }
+        return new ArrayList<>();
+    }
 
     @RequestMapping(method = RequestMethod.GET, value = "/portal")
     public String portal(HttpServletRequest request,  Model model) {
@@ -105,9 +124,14 @@ public class HomePageController extends BaseController {
             Optional<String> optionalToken = extractToken(request);
 
             if(optionalToken.isPresent()) {
+
+                model.addAttribute("token", optionalToken.get());
+
+
                 Either<MrxError, Map<String, String>> welcomeSummary = userService.retrieveWelcomeSummary(optionalToken.get());
                 Either<MrxError, Map<String, String>> annualBenefits = userService.retrieveAnnualBenefits(optionalToken.get());
 
+                Either<MrxError, List<Dependent>> dependents = userService.retrieveDependents(optionalToken.get());
 
                 if(welcomeSummary.isRight()) {
                     Map<String, String> welcomeSummaryMap = welcomeSummary.right();
@@ -117,6 +141,11 @@ public class HomePageController extends BaseController {
                 if(annualBenefits.isRight()) {
                     Map<String, String> annualBenefitsMap = annualBenefits.right();
                     model.addAllAttributes(annualBenefitsMap);
+                    model.addAttribute("fullName", annualBenefitsMap.get("firstName") + " " + annualBenefitsMap.get("lastName"));
+                }
+
+                if(dependents.isRight()) {
+                    model.addAttribute("dependents", dependents.right());
                 }
 
             }

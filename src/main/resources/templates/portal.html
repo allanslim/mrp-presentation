@@ -44,7 +44,7 @@
                         <div class="col-sm-6 col-md-4">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    <h2>Welcome</h2>
+                                    <h2>Welcome  <span th:text="${fullName}"></span></h2>
                                 </div>
                                 <div class="text-center">Member ID: <span th:text="${insuranceId}"></span></div>
                                 <div class="text-center">Rx Group ID: <span th:text="${groupId}"></span></div>
@@ -167,13 +167,14 @@
                         <div class="panel panel-justified">
                             <div class="panel-heading">
 
-                                <h2>Welcome ***</h2>
+                                <h2>Welcome  <span th:text="${fullName}"></span></h2>
                             </div>
                             <div class="col-sm-6 col-md-6">
                                 <div class="padded-multiline">
-                                    <div class="text-left">Member ID: ***insert number***</div>
-                                    <div class="text-left">Rx Group ID: ***insert number***</div>
-                                    <div class="text-left">Plan Name: ***insert name***</div>
+                                    <div class="text-left" id="isuranceMemberId">Member ID: <span th:text="${insuranceId}"></span></div>
+                                    <div class="text-left">Rx Group ID: <span th:text="${groupId}"></span></div>
+                                    <div class="text-left">Plan Name: <span th:text="${planName}"></span></div>
+
                                     <div class="divider"></div>
                                 </div>
                             </div>
@@ -183,10 +184,12 @@
                                         <div class="form-group">
                                             <label class="col-sm-2 control-label">Select Member:</label>
                                             <div class="col-sm-3">
-                                                <select class="form-control">
-                                                    <option value="1">1</option>
-                                                    <option value="2">2</option>
-                                                    <option value="3">3</option>
+                                                <select id="dependent" class="form-control" th:field="*{dependents}">
+                                                    <option th:each="dependent : ${dependents}"
+                                                            th:value="${dependent.mbrId}"
+                                                            th:text="${dependent.relationship}">
+
+                                                    </option>
                                                 </select>
                                             </div>
                                         </div>
@@ -197,17 +200,17 @@
                                         <div class="form-group">
                                             <label class="col-sm-2 control-label">Select Time Period:</label>
                                             <div class="col-sm-3">
-                                                <select class="form-control">
-                                                    <option value="3 Months">3 Months</option>
-                                                    <option value="6 Months">6 Months</option>
-                                                    <option value="12 Months">12 Months</option>
+                                                <select id="period" class="form-control">
+                                                    <option value="3">3 Months</option>
+                                                    <option value="6">6 Months</option>
+                                                    <option value="12">12 Months</option>
                                                 </select>
                                             </div>
                                         </div>
                                     </fieldset>
                                 </form>
                             </div>
-                            <table class="table table-bordered">
+                            <table id="prescriptionHistoryTable" class="table table-bordered">
                                 <thead>
                                 <tr class="active">
                                     <th> </th>
@@ -220,31 +223,7 @@
                                 </thead>
                                 <tbody>
                                 <tr>
-                                    <td>1</td>
                                     <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -265,7 +244,7 @@
                     <div class="panel panel-justified">
 
                         <div class="panel-heading">
-                            <h2>Welcome ***</h2>
+                            <h2>Welcome <span th:text="${fullName}"></span></h2>
                         </div>
                         <div class="row">
                             <div class="panel-body">
@@ -370,6 +349,36 @@
         </div>
     </div>
 </div>
+<input id="tokenId" type="hidden" th:value="${token}" ></input>
+<script>
 
+
+    $('#dependent').change(function() {
+        $("#prescriptionHistoryTable tbody").remove();
+        updateTable();
+    });
+
+    $('#period').change(function() {
+
+        $("#prescriptionHistoryTable tbody").remove();
+        updateTable();
+
+    });
+
+    var updateTable = function() {
+        $.get( "/prescriptionHistory",
+            {token: $('#tokenId').val(),  mrbId : $('#dependent').val() , period :  $('#period').val() },
+            function(data) {
+                $.each(data, function(index, value) {
+                    var row = "<tr><td>" + index + "</td><td>"+ value.rxNumber +"</td><td>"+ value.dateFilled + "</td><td>"+ value.drug +"</td><td>"+ value.mbrPaid +"</td><td>" + value.pharmacy + "</td></tr>";
+
+                    $("#prescriptionHistoryTable").last().append(row);
+                });
+
+            }
+        );
+    }
+
+</script>
 </body>
 </html>

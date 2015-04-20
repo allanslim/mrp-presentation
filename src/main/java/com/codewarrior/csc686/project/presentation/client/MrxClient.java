@@ -1,6 +1,8 @@
 package com.codewarrior.csc686.project.presentation.client;
 
+import com.codewarrior.csc686.project.presentation.model.Dependent;
 import com.codewarrior.csc686.project.presentation.model.InsuranceForm;
+import com.codewarrior.csc686.project.presentation.model.PrescriptionHistory;
 import com.codewarrior.csc686.project.presentation.model.RegisterUserInput;
 import com.codewarrior.csc686.project.presentation.util.Either;
 import com.codewarrior.csc686.project.presentation.util.MrxError;
@@ -71,7 +73,7 @@ public class MrxClient extends BaseClient {
     }
 
 
-    // curl -i -XPOST "http://ec2-54-145-194-211.compute-1.amazonaws.com/user/login?email=chong@lee.com&password=abc123"
+    // curl -i -XPOST "http://localhost:9595/user/login?email=chong@lee.com&password=abc123"
     public Either<MrxError, String> login(String email, String password) {
 
         HttpEntity<String> entity = createHttpEntity();
@@ -127,7 +129,7 @@ public class MrxClient extends BaseClient {
 
     public Either<MrxError, Map<String, String>> retrieveAnnualBenefits(String token) {
 
-        return retrieveDataFromRest(middleTierHost + "/mrxuser/annualBenefits/" + token );
+        return retrieveDataFromRest(middleTierHost + "/mrxuser/annualBenefits/" + token);
     }
 
     public Either<MrxError, Map<String, String>> retrieveWelcomeSummary(String token) {
@@ -135,6 +137,57 @@ public class MrxClient extends BaseClient {
         return retrieveDataFromRest(middleTierHost + "/mrxuser/memberInfo/" + token );
     }
 
+
+    // mrxuser/prescriptionHistory/PF9H76WF3J8J26LJ4VZN2SB36LIQNOYJ3BFZID0WHU1C0Z0K92/mrbId/34/period/3
+    public Either<MrxError, List<PrescriptionHistory>> retrievePrescriptionHistory(String token, String mrbId, int period) {
+
+        RestTemplate restTemplate = createRestTemplate();
+
+         HttpEntity<String> entity = createHttpEntity();
+
+        String url = middleTierHost + "/mrxuser/prescriptionHistory/" + token + "/mrbId/" + mrbId + "/period/" + period;
+
+         try {
+             ResponseEntity<List> responseEntity = restTemplate.exchange(url, HttpMethod.GET, entity, List.class);
+
+             List<PrescriptionHistory> responseBody = responseEntity.getBody();
+
+             if (responseEntity.getStatusCode() == HttpStatus.OK) {
+                 return Either.right(responseBody);
+             }
+
+         } catch (HttpClientErrorException e) {
+             LOG.error(e.getResponseBodyAsString(), e);
+             return Either.left(new MrxError(e.getStatusCode().toString(), "Invalid Credentials"));
+
+         }
+
+         return Either.left(new MrxError("Generic Error", "Generic Error"));
+    }
+
+    public Either<MrxError, List<Dependent>> retrieveDependents(String token) {
+
+        RestTemplate restTemplate = createRestTemplate();
+
+        HttpEntity<String> entity = createHttpEntity();
+
+        try {
+            ResponseEntity<List> responseEntity = restTemplate.exchange(middleTierHost + "/mrxuser/memberDependents/" + token, HttpMethod.GET, entity, List.class);
+
+            List<Dependent> responseBody = responseEntity.getBody();
+
+            if (responseEntity.getStatusCode() == HttpStatus.OK) {
+                return Either.right(responseBody);
+            }
+
+        } catch (HttpClientErrorException e) {
+            LOG.error(e.getResponseBodyAsString(), e);
+            return Either.left(new MrxError(e.getStatusCode().toString(), "Invalid Credentials"));
+
+        }
+
+        return Either.left(new MrxError("Generic Error", "Generic Error"));
+    }
 
 
     public Either<MrxError, Map<String, String>> retrieveDataFromRest(String url) {
@@ -160,7 +213,6 @@ public class MrxClient extends BaseClient {
 
         return Either.left(new MrxError("Generic Error", "Generic Error"));
     }
-
 
 
 
@@ -267,7 +319,6 @@ public class MrxClient extends BaseClient {
         headers.setAccept(acceptTypes);
         return headers;
     }
-
 
 
 }
