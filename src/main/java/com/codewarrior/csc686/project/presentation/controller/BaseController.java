@@ -10,9 +10,11 @@ public class BaseController {
         signInOutLink.label = label;
         signInOutLink.link = link;
         model.addAttribute("signInOutLink", signInOutLink);
+        model.addAttribute("showPortal", true);
     }
 
     protected void createDefaultSignInOutLink(Model model) {
         createSignInOutLink(model, "Sign In", "/");
+        model.addAttribute("showPortal", false);
     }
 }
