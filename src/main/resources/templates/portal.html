@@ -63,26 +63,26 @@
                                     <tr>
                                         <td>1</td>
                                         <td>Deductible</td>
-                                        <td>$0</td>
-                                        <td>$0</td>
+                                        <td><span th:text="${deductibleAmountIndividual}"></span></td>
+                                        <td><span th:text="${deductibleAmountFamily}"></span></td>
                                     </tr>
                                     <tr>
                                         <td>2</td>
                                         <td>Deductible Paid YTD</td>
-                                        <td>$0</td>
-                                        <td>$0</td>
+                                        <td><span th:text="${benefitAmountIndividual}"></span></td>
+                                        <td><span th:text="${benefitAmountFamily}"></span></td>
                                     </tr>
                                     <tr>
                                         <td>3</td>
                                         <td>Deductible Remaining YTD</td>
-                                        <td>$0</td>
-                                        <td>$0</td>
+                                        <td><span th:text="${coInsuranceIndividual}"></span></td>
+                                        <td><span th:text="${coInsuranceFamily}"></span></td>
                                     </tr>
                                     <tr>
                                         <td>4</td>
                                         <td>Maximum Out-Of-Pocket</td>
-                                        <td>$2000</td>
-                                        <td>$4000                   </td>
+                                        <td><span th:text="${maximumOutOfPocketIndividual}"></span></td>
+                                        <td><span th:text="${maximumOutOfPocketFamily}"></span></td>
                                     </tr>
                                     </tbody>
                                 </table>
