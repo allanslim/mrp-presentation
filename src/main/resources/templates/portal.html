@@ -21,10 +21,7 @@
 
 <div th:include="navigation :: navigation"></div>
 
-
 <div class="jumbotron"><h1>ABC Member Portal</h1></div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 <div class="container-fluid">
     <div id="content">
         <ul id="tabs" data-tabs="tabs" class="nav nav-tabs nav-justified">
@@ -68,15 +65,15 @@
                                     </tr>
                                     <tr>
                                         <td>2</td>
-                                        <td>Deductible Paid YTD</td>
-                                        <td><span th:text="${benefitAmountIndividual}"></span></td>
-                                        <td><span th:text="${benefitAmountFamily}"></span></td>
+                                        <td>Coinsurance</td>
+                                        <td><span th:text="${coInsuranceIndividual}"></span></td>
+                                        <td><span th:text="${coInsuranceFamily}"></span></td>
                                     </tr>
                                     <tr>
                                         <td>3</td>
-                                        <td>Deductible Remaining YTD</td>
-                                        <td><span th:text="${coInsuranceIndividual}"></span></td>
-                                        <td><span th:text="${coInsuranceFamily}"></span></td>
+                                        <td>Benefits Limit</td>
+                                        <td><span th:text="${benefitAmountIndividual}"></span></td>
+                                        <td><span th:text="${benefitAmountFamily}"></span></td>
                                     </tr>
                                     <tr>
                                         <td>4</td>
@@ -321,6 +318,7 @@
             <div id="Locate" class="tab-pane">
                 <div class="text-center">
                     <h1>Locate a Pharmacy</h1>
+                    <div id="googleMap" ></div>
                 </div>
             </div>
             <div id="Health" class="tab-pane">
@@ -350,8 +348,20 @@
     </div>
 </div>
 <input id="tokenId" type="hidden" th:value="${token}" ></input>
+
+<script src="http://maps.google.com/maps/api/js?sensor=true"></script>
+<script src="/js/gmaps.js"></script>
 <script>
 
+    var map;
+
+    $(function() {
+        map = new GMaps({
+          div: '#googleMap',
+          lat: -12.043333,
+          lng: -77.028333
+        });
+    });
 
     $('#dependent').change(function() {
         $("#prescriptionHistoryTable tbody").remove();
@@ -359,7 +369,6 @@
     });
 
     $('#period').change(function() {
-
         $("#prescriptionHistoryTable tbody").remove();
         updateTable();
 
@@ -379,6 +388,8 @@
         );
     }
 
+
 </script>
+
 </body>
 </html>
