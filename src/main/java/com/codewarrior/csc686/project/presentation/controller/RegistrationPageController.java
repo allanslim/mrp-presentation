@@ -23,8 +23,13 @@ public class RegistrationPageController extends BaseController {
     private UserService userService;
 
     @RequestMapping(method = RequestMethod.GET, value = "/registrationSuccess")
-    public String registrationSuccess(Model model) {
+    public String registrationSuccess(HttpServletRequest request, Model model) {
         createDefaultSignInOutLink(model);
+
+
+        model.addAttribute("showPortal", false);
+
+
         return "registrationSuccess";
     }
 
@@ -40,6 +45,8 @@ public class RegistrationPageController extends BaseController {
     public String registerInsuranceForm(HttpServletRequest request, HttpServletResponse response, @Valid InsuranceForm insuranceForm, BindingResult bindingResult, Model model) {
 
         createDefaultSignInOutLink(model);
+        model.addAttribute("showPortal", false);
+
 
         if (bindingResult.hasErrors()) {
             model.addAttribute("errorMessage", "All fields are required.");
@@ -63,6 +70,8 @@ public class RegistrationPageController extends BaseController {
     @RequestMapping(method = RequestMethod.GET, value = "/registrationEmail")
     public String registrationEmailAccount(InsuranceForm insuranceForm, Model model) {
         createDefaultSignInOutLink(model);
+        model.addAttribute("showPortal", false);
+
         return "registrationEmail";
     }
 
@@ -71,6 +80,8 @@ public class RegistrationPageController extends BaseController {
     public String validateEmailAccount(HttpServletRequest request, HttpServletResponse response, @Valid InsuranceForm insuranceForm, BindingResult bindingResult, Model model) {
 
         createDefaultSignInOutLink(model);
+        model.addAttribute("showPortal", false);
+
 
         if (!insuranceForm.isEmailAndPasswordSupplied()) {
             model.addAttribute("errorMessage", "All fields are required.");
@@ -96,6 +107,8 @@ public class RegistrationPageController extends BaseController {
     public String registrationFinal(InsuranceForm insuranceForm, Model model) {
 
         createDefaultSignInOutLink(model);
+        model.addAttribute("showPortal", false);
+
         return "registrationFinal";
     }
 
@@ -104,6 +117,8 @@ public class RegistrationPageController extends BaseController {
     public String registerUser(HttpServletRequest request, HttpServletResponse response, @Valid InsuranceForm insuranceForm, BindingResult bindingResult, Model model) {
 
         createDefaultSignInOutLink(model);
+        model.addAttribute("showPortal", false);
+
 
         if (!insuranceForm.areQuestionsAndAnswersSupplied()) {
             model.addAttribute("errorMessage", "All fields are required.");

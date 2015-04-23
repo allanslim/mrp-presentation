@@ -3,7 +3,6 @@ package com.codewarrior.csc686.project.presentation.controller;
 import com.codewarrior.csc686.project.presentation.model.Dependent;
 import com.codewarrior.csc686.project.presentation.model.LoginCredential;
 import com.codewarrior.csc686.project.presentation.model.PrescriptionHistory;
-import com.codewarrior.csc686.project.presentation.model.SignInOutLink;
 import com.codewarrior.csc686.project.presentation.service.UserService;
 import com.codewarrior.csc686.project.presentation.util.Either;
 import com.codewarrior.csc686.project.presentation.util.MrxError;
@@ -34,6 +33,7 @@ public class HomePageController extends BaseController {
     @RequestMapping(method = RequestMethod.GET, value = "/")
     public String index(LoginCredential loginCredential, Model model) {
         createDefaultSignInOutLink(model);
+        model.addAttribute("showPortal", false);
         return "index";
     }
 
@@ -41,7 +41,7 @@ public class HomePageController extends BaseController {
     public String logout( HttpServletRequest request, Model model) {
 
         createDefaultSignInOutLink(model);
-
+        model.addAttribute("showPortal", false);
         Either<MrxError, Boolean> logout = userService.logout(extractToken(request).get());
 
         if(logout.isRight()) {
@@ -56,6 +56,7 @@ public class HomePageController extends BaseController {
     public String login(HttpServletRequest request, HttpServletResponse response, @Valid LoginCredential loginCredential, BindingResult bindingResult, Model model) {
 
         createDefaultSignInOutLink(model);
+        model.addAttribute("showPortal", false);
 
         if (bindingResult.hasErrors()) {
             return "index";
@@ -81,10 +82,11 @@ public class HomePageController extends BaseController {
     @RequestMapping(method = RequestMethod.GET, value = "/home")
     public String home(HttpServletRequest request,  Model model) {
         createDefaultSignInOutLink(model);
+        model.addAttribute("showPortal", false);
 
         if (isTokenValid(request)) {
             createSignInOutLink(model, "Sign Out", "/signOut");
-
+            model.addAttribute("showPortal", true);
             return "home";
         }
 
@@ -94,6 +96,11 @@ public class HomePageController extends BaseController {
     @RequestMapping(method = RequestMethod.GET, value = "/about")
     public String about(HttpServletRequest request,  Model model) {
         createDefaultSignInOutLink(model);
+
+        if (isTokenValid(request)) {
+            createSignInOutLink(model, "Sign Out", "/signOut");
+            model.addAttribute("showPortal", true);
+        }
 
         return "about";
     }
@@ -113,13 +120,15 @@ public class HomePageController extends BaseController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/portal")
-    public String portal(HttpServletRequest request,  Model model) {
+    public String portal(HttpServletRequest request, Model model){
         createDefaultSignInOutLink(model);
+        model.addAttribute("showPortal", false);
 
         model.addAttribute("greeting", "Hello Allan");
 
         if (isTokenValid(request)) {
             createSignInOutLink(model, "Sign Out", "/signOut");
+            model.addAttribute("showPortal", true);
 
             Optional<String> optionalToken = extractToken(request);
 
@@ -157,9 +166,16 @@ public class HomePageController extends BaseController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/contactUs")
-    public String contactUs( Model model) {
+    public String contactUs( HttpServletRequest request, Model model) {
 
         createDefaultSignInOutLink(model);
+        model.addAttribute("showPortal", false);
+
+        if (isTokenValid(request)) {
+            createSignInOutLink(model, "Sign Out", "/signOut");
+            model.addAttribute("showPortal", true);
+        }
+
 
         return "contactUs";
     }
