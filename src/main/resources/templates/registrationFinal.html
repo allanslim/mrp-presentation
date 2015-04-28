@@ -1,192 +1,203 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
-    <div th:include="header :: header"></div>
-    <style>
-        body {
+<div th:include="header :: header"></div>
+<style>
+    body {
         background-image: url("images/background.png");
         background-size: cover;
-        }
-    </style>
-    <body>
+    }
+</style>
+<body>
 
-        <div th:include="navigation :: navigation"></div>
+<div th:include="navigation :: navigation"></div>
 
-        <div class="jumbotron"><h1>ABC Member Portal</h1></div>
+<div class="jumbotron"><h1>ABC Member Portal</h1></div>
 
-        <div class="container" id="myWizard">
+<div class="container" id="myWizard">
 
-            <h3>Member Registration</h3>
+    <h3>Member Registration</h3>
 
-            <hr></hr>
+    <hr></hr>
 
-            <div class="progress">
-                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="1" aria-valuemin="1" aria-valuemax="3" style="width: 100%;">
-                    Step 3 of 3
-                </div>
+    <div class="progress">
+        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="1" aria-valuemin="1"
+             aria-valuemax="3" style="width: 100%;">
+            Step 3 of 3
+        </div>
+    </div>
+
+    <div class="navbar">
+        <div class="navbar-inner">
+            <ul class="nav nav-pills">
+                <li><a href="#step1" data-step="1">Step 1</a></li>
+                <li><a href="#step2" data-step="2">Step 2</a></li>
+                <li class="active"><a href="#step3" data-step="3">Step 3</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="tab-content">
+        <div class="tab-pane fade in active" id="step3">
+            <div class="well">
+                <h2>Step 3</h2>
+                <label>Security Question 1</label>
+                <select class="form-control input-lg">
+                    <option value="What was the name of your first pet?">What was the name of your first pet?</option>
+                    <option value="Where did you first attend school?">Where did you first attend school?</option>
+                    <option value="What is your mother's maiden name?">What is your mother's maiden name?</option>
+                    <option value="What is your favorite car model?">What is your favorite car model?</option>
+                </select>
+                <br></br>
+                <label>Enter Response</label>
+                <input class="form-control input-lg"></input>
+
+                <label>Security Question 2</label>
+                <select class="form-control input-lg">
+                    <option value="What was the name of your first pet?">What was the name of your first pet?</option>
+                    <option value="Where did you first attend school?">Where did you first attend school?</option>
+                    <option value="What is your mother's maiden name?">What is your mother's maiden name?</option>
+                    <option value="What is your favorite car model?">What is your favorite car model?</option>
+                </select>
+                <br></br>
+                <label>Enter Response</label>
+                <input class="form-control input-lg"></input>
+
+                <label>Security Question 3</label>
+                <select class="form-control input-lg">
+                    <option value="What was the name of your first pet?">What was the name of your first pet?</option>
+                    <option value="Where did you first attend school?">Where did you first attend school?</option>
+                    <option value="What is your mother's maiden name?">What is your mother's maiden name?</option>
+                    <option value="What is your favorite car model?">What is your favorite car model?</option>
+                </select>
+                <br></br>
+                <label>Enter Response</label>
+                <input class="form-control input-lg"></input>
             </div>
+            <a class="btn btn-success first" href="#">Submit</a>
+        </div>
+    </div>
+    <script>$('.next').click(function () {
 
-            <div class="navbar">
-                <div class="navbar-inner">
-                    <ul class="nav nav-pills">
-                        <li><a href="#step1"  data-step="1">Step 1</a></li>
-                        <li><a href="#step2"  data-step="2">Step 2</a></li>
-                        <li class="active"><a href="#step3"  data-step="3">Step 3</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="tab-content">
-                <div class="tab-pane fade in active" id="step3">
-                    <div class="well">
-                        <h2>Step 3</h2>
-                        <label>Security Question 1</label>
-                        <select class="form-control input-lg">
-                            <option value="What was the name of your first pet?">What was the name of your first pet?</option>
-                            <option value="Where did you first attend school?">Where did you first attend school?</option>
-                            <option value="What is your mother's maiden name?">What is your mother's maiden name?</option>
-                            <option value="What is your favorite car model?">What is your favorite car model?</option>
-                        </select>
-                        <br></br>
-                        <label>Enter Response</label>
-                        <input class="form-control input-lg"></input>
+        var nextId = $(this).parents('.tab-pane').next().attr("id");
+        $('[href=#' + nextId + ']').tab('show');
+        return false;
 
-                        <label>Security Question 2</label>
-                        <select class="form-control input-lg">
-                            <option value="What was the name of your first pet?">What was the name of your first pet?</option>
-                            <option value="Where did you first attend school?">Where did you first attend school?</option>
-                            <option value="What is your mother's maiden name?">What is your mother's maiden name?</option>
-                            <option value="What is your favorite car model?">What is your favorite car model?</option>
-                        </select>
-                        <br></br>
-                        <label>Enter Response</label>
-                        <input class="form-control input-lg"></input>
+    })
 
-                        <label>Security Question 3</label>
-                        <select class="form-control input-lg">
-                            <option value="What was the name of your first pet?">What was the name of your first pet?</option>
-                            <option value="Where did you first attend school?">Where did you first attend school?</option>
-                            <option value="What is your mother's maiden name?">What is your mother's maiden name?</option>
-                            <option value="What is your favorite car model?">What is your favorite car model?</option>
-                        </select>
-                        <br></br>
-                        <label>Enter Response</label>
-                        <input class="form-control input-lg"></input>
-                    </div>
-                    <a class="btn btn-success first" href="#">Submit</a>
-                </div>
-            </div>
-          <script>$('.next').click(function(){
+    $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
 
-          var nextId = $(this).parents('.tab-pane').next().attr("id");
-          $('[href=#'+nextId+']').tab('show');
-          return false;
+        //update progress
+        var step = $(e.target).data('step');
+        var percent = (parseInt(step) / 3) * 100;
 
-        })
+        $('.progress-bar').css({width: percent + '%'});
+        $('.progress-bar').text("Step " + step + " of 3");
 
-        $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+        //e.relatedTarget // previous tab
 
-          //update progress
-          var step = $(e.target).data('step');
-          var percent = (parseInt(step) / 3) * 100;
+    })
 
-          $('.progress-bar').css({width: percent + '%'});
-          $('.progress-bar').text("Step " + step + " of 3");
+    $('.first').click(function () {
 
-          //e.relatedTarget // previous tab
+        $('#myWizard a:first').tab('show')
 
-        })
-
-        $('.first').click(function(){
-
-          $('#myWizard a:first').tab('show')
-
-        })
-        </script>
+    })
+    </script>
 
 
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-xs-12 col-sm-8 col-md-10 col-sm-offset-1 col-md-offset-1">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-12 col-sm-8 col-md-10 col-sm-offset-1 col-md-offset-1">
 
 
-                        <h2>Member Registration</h2>
+                <h2>Member Registration</h2>
 
 
-                        <div class="row">
+                <div class="row">
 
-                            <div class="col-xs-12 col-sm-6 col-md-4" id="registrationForm">
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
-                                        <h4>Security Questions</h4>
-                                    </div>
-                                    <div class="panel-body">
-
-
-
-                                        <form  th:action="@{/registrationFinal}" th:object="${insuranceForm}" method="POST">
-                                            <input class="form-control  input-lg" id="rx_grp_id" name="rx_grp_id"  th:field="*{groupId}" placeholder="Rx Group ID" type="hidden"></input>
-                                            <input class="form-control  input-lg" id="member_id" name="member_id"  th:field="*{memberId}" placeholder="Member ID" type="hidden" ></input>
-                                            <input class="form-control  input-lg" id="fname" name="first_name"  th:field="*{firstname}"  placeholder="First Name" type="hidden" ></input>
-                                            <input class="form-control  input-lg" id="lname" name="last_name"  th:field="*{lastname}" placeholder="Last Name" type="hidden" ></input>
-                                            <input class="form-control  input-lg" id="dob" name="date_of_birth"  th:field="*{birthDate}"  placeholder="Date of Birth" type="hidden"></input>
-
-                                            <input class="form-control  input-lg" id="email" name="email" th:field="*{email}" type="hidden"></input>
-                                            <input class="form-control  input-lg" id="password" name="password" th:field="*{password}" type="hidden"></input>
-
-                                            <div class="form-register">
-                                                <div class="row">
-                                                    <div class="col-xs-12 col-sm-6 col-md-4">
-                                                        <select th:field="*{question1}" class="form-control" name="question1">
-                                                            <option value="Mother's Maiden Name">Mother's Maiden Name</option>
-                                                            <option value="Father's Middle Name">Father's Middle Name</option>
-                                                            <option value="Favorite Sports Team">Favorite Sports Team</option>
-                                                            <option value="High School Mascot">High School Mascot</option>
-                                                            <option value="First Grade Teacher">First Grade Teacher</option>
-                                                        </select>
-                                                        <br/><br/>
-                                                        <select th:field="*{question2}" class="form-control" name="question2">
-                                                            <option value="Best Friend's Name">Best Friend's Name</option>
-                                                            <option value="Date of Birth">Date of Birth</option>
-                                                            <option value="Favorite Color">Favorite Color</option>
-                                                            <option value="Favorite Movie">Favorite Movie</option>
-                                                            <option value="Favorite Hobby">Favorite Hobby</option>
-                                                        </select>
-                                                        <br/><br/>
-                                                        <select th:field="*{question3}" class="form-control" name="question3">
-                                                            <option value="Place of Birth">Place of Birth</option>
-                                                            <option value="Model of Your First Car">Model of Your First Car</option>
-                                                            <option value="Favorite Food">Favorite Food</option>
-                                                            <option value="Your First Pets Name">Your First Pets Name</option>
-                                                            <option value="Sibling's Middle Name">Sibling's Middle Name</option>
-                                                        </select>
-                                                        <br/><br/>
-                                                        <button type="submit" class="btn btn-default">Submit</button>
-                                                    </div>
-                                                    <div class="col-xs-12 col-sm-6 col-md-4 col-md-offset-2">
-
-                                                            <div class="form-register"><label></label>
-                                                                <input id="answer1" th:field="*{answer1}" name="answer1" placeholder="Answer #1" type="text"></input><br/><br/>
-                                                                <br/>
-                                                                <input id="answer2" th:field="*{answer2}" name="answer2" placeholder="Answer #2" type="text"></input><br/><br/><br/>
-                                                                <input id="answer3" th:field="*{answer3}" name="answer3" placeholder="Answer #3" type="text"></input><br/><br/>
-
-
-                                                            </div>
-
-                                                    </div>
-                                                </div>
-                                             </div>
-                                        </form>
-
-                                    </div>
-                                </div>
+                    <div class="col-xs-12 col-sm-6 col-md-4" id="registrationForm">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4>Security Questions</h4>
                             </div>
+                            <div class="panel-body">
 
+
+                                <form th:action="@{/registrationFinal}" th:object="${insuranceForm}" method="POST">
+                                    <input class="form-control  input-lg" id="rx_grp_id" name="rx_grp_id"
+                                           th:field="*{groupId}" placeholder="Rx Group ID" type="hidden"></input>
+                                    <input class="form-control  input-lg" id="member_id" name="member_id"
+                                           th:field="*{memberId}" placeholder="Member ID" type="hidden"></input>
+                                    <input class="form-control  input-lg" id="fname" name="first_name"
+                                           th:field="*{firstname}" placeholder="First Name" type="hidden"></input>
+                                    <input class="form-control  input-lg" id="lname" name="last_name"
+                                           th:field="*{lastname}" placeholder="Last Name" type="hidden"></input>
+                                    <input class="form-control  input-lg" id="dob" name="date_of_birth"
+                                           th:field="*{birthDate}" placeholder="Date of Birth" type="hidden"></input>
+
+                                    <input class="form-control  input-lg" id="email" name="email" th:field="*{email}"
+                                           type="hidden"></input>
+                                    <input class="form-control  input-lg" id="password" name="password"
+                                           th:field="*{password}" type="hidden"></input>
+
+                                    <div class="form-register">
+                                        <div class="row">
+                                            <div class="col-xs-12 col-sm-6 col-md-4">
+                                                <select th:field="*{question1}" class="form-control" name="question1">
+                                                    <option value="Mother's Maiden Name">Mother's Maiden Name</option>
+                                                    <option value="Father's Middle Name">Father's Middle Name</option>
+                                                    <option value="Favorite Sports Team">Favorite Sports Team</option>
+                                                    <option value="High School Mascot">High School Mascot</option>
+                                                    <option value="First Grade Teacher">First Grade Teacher</option>
+                                                </select>
+                                                <br/><br/>
+                                                <select th:field="*{question2}" class="form-control" name="question2">
+                                                    <option value="Best Friend's Name">Best Friend's Name</option>
+                                                    <option value="Date of Birth">Date of Birth</option>
+                                                    <option value="Favorite Color">Favorite Color</option>
+                                                    <option value="Favorite Movie">Favorite Movie</option>
+                                                    <option value="Favorite Hobby">Favorite Hobby</option>
+                                                </select>
+                                                <br/><br/>
+                                                <select th:field="*{question3}" class="form-control" name="question3">
+                                                    <option value="Place of Birth">Place of Birth</option>
+                                                    <option value="Model of Your First Car">Model of Your First Car
+                                                    </option>
+                                                    <option value="Favorite Food">Favorite Food</option>
+                                                    <option value="Your First Pets Name">Your First Pets Name</option>
+                                                    <option value="Sibling's Middle Name">Sibling's Middle Name</option>
+                                                </select>
+                                                <br/><br/>
+                                                <button type="submit" class="btn btn-default">Submit</button>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-6 col-md-4 col-md-offset-2">
+
+                                                <div class="form-register"><label></label>
+                                                    <input id="answer1" th:field="*{answer1}" name="answer1"
+                                                           placeholder="Answer #1" type="text"></input><br/><br/>
+                                                    <br/>
+                                                    <input id="answer2" th:field="*{answer2}" name="answer2"
+                                                           placeholder="Answer #2" type="text"></input><br/><br/><br/>
+                                                    <input id="answer3" th:field="*{answer3}" name="answer3"
+                                                           placeholder="Answer #3" type="text"></input><br/><br/>
+
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+
+                            </div>
                         </div>
+                    </div>
 
                 </div>
+
             </div>
         </div>
-
-    </body>
+    </div>
+</div>
+</body>
 </html>
