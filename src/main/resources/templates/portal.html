@@ -41,7 +41,7 @@
                         <div class="col-sm-6 col-md-4">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    <h2>Welcome  <span th:text="${fullName}"></span></h2>
+                                    <h3>Welcome  <span th:text="${fullName}"></span></h3>
                                 </div>
                                 <div class="text-center">Member ID: <span th:text="${insuranceId}"></span></div>
                                 <div class="text-center">Rx Group ID: <span th:text="${groupId}"></span></div>
@@ -87,70 +87,119 @@
                         </div><!--col 1-->
                         <div class="col-sm-6 col-md-4">
                             <div class="panel panel-default">
-                                <div class="text-center">Copayments/Coinsurance</div>
                                 <div class="panel-heading">RETAIL - Regular Supply</div>
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col-sm-6 col-md-4">
-                                            <p>Formulary Generic</p>
-                                            <p>Non-Formulary Generic</p>
-                                            <p>Formulary Brand</p>
-                                            <p>Non-Formulary Brand                   </p>
-                                        </div>
-                                        <div class="col-sm-6 col-md-4">
-                                            <div class="divider-vertical">
-                                                <p>$8.00</p>
-                                                <p>$8.00</p>
-                                                <p>$30.00</p>
-                                                <p>$50.00</p>
-                                            </div>
-                                        </div>
-                                    </div><!--row 1 panel 2-->
-                                </div><!--container 2-->
+
+                                        <table class="table table-bordered">
+                                            <thead>
+                                            <tr class="active">
+                                                <th>Prescription Type</th>
+                                                <th>Copay</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td>Formulary Generic</td>
+                                                <td>$8.00</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Non-Forulary Generic</td>
+                                                <td>$8.00</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Formulary Brand</td>
+                                                <td>$30.00</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Non-Formulary Brand</td>
+                                                <td>$50.00</td>
+                                            </tr>
+
+                                            </tbody>
+                                            </table>
                             </div><!--col 2 panel 1-->
                             <div class="panel panel-default">
                                 <div class="panel-heading">RETAIL - Extended Day Supply</div>
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col-sm-6 col-md-4">
-                                            <p>Formulary Generic</p>
-                                            <p>Non-Formulary Generic</p>
-                                            <p>Formulary Brand</p>
-                                            <p>Non-Formulary Brand                   </p>
-                                        </div>
-                                        <div class="col-sm-6 col-md-4">
-                                            <div class="divider-vertical">
-                                                <p>$24.00</p>
-                                                <p>$24.00</p>
-                                                <p>$90.00</p>
-                                                <p>$150.00</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+
+                                <table class="table table-bordered">
+                                    <thead>
+                                    <tr class="active">
+                                        <th>Prescription Type</th>
+                                        <th>Copay</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>Formulary Generic</td>
+                                        <td>$24.00</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Non-Forulary Generic</td>
+                                        <td>$24.00</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Formulary Brand</td>
+                                        <td>$90.00</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Non-Formulary Brand</td>
+                                        <td>$150.00</td>
+                                    </tr>
+
+                                    </tbody>
+                                </table>
                             </div><!--col 2 panel 2-->
-                            <div class="panel panel-default">
-                                <div class="panel-heading">Mail Order</div>
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col-sm-6 col-md-4">
-                                            <p>Formulary Generic</p>
-                                            <p>Non-Formulary Generic</p>
-                                            <p>Formulary Brand</p>
-                                            <p>Non-Formulary Brand                   </p>
-                                        </div>
-                                        <div class="col-sm-6 col-md-4">
-                                            <div class="divider-vertical">
-                                                <p>$16.00</p>
-                                                <p>$16.00</p>
-                                                <p>$60.00</p>
-                                                <p>$100.00</p>
-                                            </div>
+
+                        </div><!--col 2-->
+                        <div class="col-sm-6 col-md-4">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">Mail Order</div>
+                            <table class="table table-bordered">
+                                <thead>
+                                <tr class="active">
+                                    <th>Prescription Type</th>
+                                    <th>Copay</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>Formulary Generic</td>
+                                    <td>$16.00</td>
+                                </tr>
+                                <tr>
+                                    <td>Non-Forulary Generic</td>
+                                    <td>$16.00</td>
+                                </tr>
+                                <tr>
+                                    <td>Formulary Brand</td>
+                                    <td>$60.00</td>
+                                </tr>
+                                <tr>
+                                    <td>Non-Formulary Brand</td>
+                                    <td>$100.00</td>
+                                </tr>
+
+                                </tbody>
+                            </table>
+                            <!--<div class="container">
+                                <div class="row">
+                                    <div class="col-sm-6 col-md-4">
+                                        <p>Formulary Generic</p>
+                                        <p>Non-Formulary Generic</p>
+                                        <p>Formulary Brand</p>
+                                        <p>Non-Formulary Brand                   </p>
+                                    </div>
+                                    <div class="col-sm-6 col-md-4">
+                                        <div class="divider-vertical">
+                                            <p>$16.00</p>
+                                            <p>$16.00</p>
+                                            <p>$60.00</p>
+                                            <p>$100.00</p>
                                         </div>
                                     </div>
                                 </div>
-                            </div><!--col 2 panel 3-->
-                        </div><!--col 2-->
+                            </div>-->
+                        </div><!--col 2 panel 3-->
+                        </div>
                     </div><!--row-->
                 </div><!--prescription class-->
             </div><!--prescription tab-->

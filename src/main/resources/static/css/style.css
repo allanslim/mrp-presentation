@@ -97,6 +97,11 @@ a {
     border-color: #eee #eee #ddd;
     color: white;
   }
+  .nav-tabs>li>a {
+    background-color: #333333;
+    border-color: #777777;
+    color:#fff;
+  }
 #basicModal {
 top:45%;
 outline: none;
