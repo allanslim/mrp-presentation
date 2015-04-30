@@ -11,6 +11,7 @@
         }
     </style>
 
+
     <body>
 
         <div th:include="navigation :: navigation"></div>
@@ -18,12 +19,55 @@
         <div class="jumbotron"><h1>ABC Member Portal</h1></div>
 
         <div class="container-fluid">
+            <div class="col-md-8 col-md-offset-2">
 
+        <div class="carousel fade-carousel slide" data-ride="carousel" data-interval="4000" id="bs-carousel">
+            <!-- Overlay -->
+            <div class="overlay"></div>
 
-            <h1>About Content here</h1>
+            <!-- Indicators -->
+            <ol class="carousel-indicators">
+                <li data-target="#bs-carousel" data-slide-to="0" class="active"></li>
+                <li data-target="#bs-carousel" data-slide-to="1"></li>
+                <li data-target="#bs-carousel" data-slide-to="2"></li>
+            </ol>
+
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner">
+                <div class="item slides active">
+                    <div class="slide-1"></div>
+                    <div class="hero">
+                        <hgroup>
+                            <h1>Secure</h1>
+                            <h3>RMP uses state-of-the-art security provided by master lock</h3>
+                        </hgroup>
+                        <button class="btn btn-hero btn-lg" role="button">possible link</button>
+                    </div>
+                </div>
+                <div class="item slides">
+                    <div class="slide-2"></div>
+                    <div class="hero">
+                        <hgroup>
+                            <h1>24/7 Access</h1>
+                            <h3>Amazon cloud services provide reliable access any time of day</h3>
+                        </hgroup>
+                        <button class="btn btn-hero btn-lg" role="button">possible link</button>
+                    </div>
+                </div>
+                <div class="item slides">
+                    <div class="slide-3"></div>
+                    <div class="hero">
+                        <hgroup>
+                            <h1>Features</h1>
+                            <h3>RMP portal provides lots of goodies</h3>
+                        </hgroup>
+                        <button class="btn btn-hero btn-lg" role="button">no button?</button>
+                    </div>
+                </div>
+            </div>
         </div>
-
-
+            </div>
+        </div>
     </body>
 </html>
 
