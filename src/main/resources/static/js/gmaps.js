@@ -1,3 +1,4 @@
+"use strict";
 (function(root, factory) {
   if(typeof exports === 'object') {
     module.exports = factory();
@@ -121,7 +122,7 @@ var getElementById = function(id, context) {
   var element,
   id = id.replace('#', '');
 
-  if ('jQuery' in this && context) {
+  if ('jQuery' in window && context) {
     element = $('#' + id, context)[0];
   } else {
     element = document.getElementById(id);

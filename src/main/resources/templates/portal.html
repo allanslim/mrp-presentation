@@ -17,8 +17,18 @@
 
     }
 </style>
+<style type="text/css">
+    #map {
+    width: 100%;
+    height: 400px;
+    }
+    #map {
+    background: #58B;
+    }
+</style>
 <body>
-
+<script src="http://maps.google.com/maps/api/js?sensor=true"></script>
+<script src="/js/gmaps.js"></script>
 <div th:include="navigation :: navigation"></div>
 
 <div class="jumbotron"><h1>ABC Member Portal</h1></div>
@@ -356,9 +366,68 @@
             <div id="Locate" class="tab-pane">
                 <div class="text-center">
                     <h1>Locate a Pharmacy</h1>
-                    <div id="googleMap" ></div>
                 </div>
-            </div>
+                    <div class="Locate">
+                        <div class="panel panel-justified">
+
+                            <div class="panel-heading">
+                                <h2>Welcome <span th:text="${fullName}"></span></h2>
+                            </div>
+                            <div class="row">
+                                <div class="panel-body">
+                                    <div class="col-sm-6 col-md-6">
+                                        <div class="padded-multiline">
+                                            <div class="text-left">Member ID: <span th:text="${insuranceId}"></span></div>
+                                            <div class="text-left">Rx Group ID: <span th:text="${groupId}"></span></div>
+                                            <div class="text-left">Plan Name:  <span th:text="${planName}"></span></div>
+                                            <div class="divider"></div>
+                                            <hr></hr>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6 col-md-6">
+                                        <form role="form" class="form-horizontal">
+                                            <fieldset>
+                                                <div class="form-group">
+                                                    <label class="col-sm-4 control-label">Address:</label>
+                                                    <div class="col-sm-5">
+                                                        <input type="text" class="form-control input-lg" placeholder="Enter an Address, City and State, or ZIP Code:"></input>
+                                                    </div>
+                                                </div>
+                                            </fieldset>
+                                        </form>
+                                    </div>
+                                    <div class="col-sm-6 col-md-6">
+                                        <form role="form" class="form-horizontal">
+                                            <fieldset>
+                                                <div class="form-group">
+                                                    <label class="col-sm-4 control-label">Search Within:</label>
+                                                    <div class="col-sm-5">
+                                                        <select class="form-control input-lg">
+                                                            <option value="5 Miles">5 Miles</option>
+                                                            <option value="10 Miles">10 Miles</option>
+                                                            <option value="20 Miles">20 Miles</option>
+                                                        </select>
+                                                        <br></br>
+                                                        <input type="submit" class="btn btn-info" value="Locate Pharmacy"/>
+                                                    </div>
+                                                </div>
+
+                                            </fieldset>
+                                        </form>
+                                    </div>
+
+                                </div>
+
+                                    <div id="map"></div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             <div id="Health" class="tab-pane">
                 <div class="text-center">
                     <h1>Health and Wellness</h1>
@@ -387,9 +456,14 @@
 </div>
 <input id="tokenId" type="hidden" th:value="${token}" ></input>
 
-<script src="http://maps.google.com/maps/api/js?sensor=true"></script>
-<script src="/js/gmaps.js"></script>
 <script>
+    var map = new GMaps({
+    div: '#map',
+    lat: -12.043333,
+    lng: -77.028333
+});
+</script>
+<!--<script>
 
     var map;
 
@@ -427,7 +501,7 @@
     }
 
 
-</script>
+</script>-->
 
 </body>
 </html>
