@@ -13,13 +13,16 @@
 
 <div th:include="navigation :: navigation"></div>
 
-<div class="jumbotron"><h1>ABC Member Portal</h1></div>
+<div class="jumbotron"><h1>RX Member Portal</h1></div>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css"></link>
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <script>
-  $(function() {
-    $( "#dob" ).datepicker();
-  });
+ $(document).ready(function() {
+    $("#dob").datepicker({
+    changeYear:true,
+    yearRange: "-100:+0"
+    });
+});
   </script>
 
 <div class="container" id="myWizard">
@@ -65,9 +68,8 @@
             </div>
     <hr></hr>
 
-    <a href="/terms?">Terms of Use</a>
 
-    <hr></hr>
+
     </div>
 </div>
 </body>
