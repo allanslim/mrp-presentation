@@ -225,7 +225,7 @@
                                                 <select id="dependent" class="form-control" th:field="*{dependents}">
                                                     <option th:each="dependent : ${dependents}"
                                                             th:value="${dependent.mbrId}"
-                                                            th:text="${dependent.relationship}">
+                                                            th:text="${dependent.mbrName}">
 
                                                     </option>
                                                 </select>
@@ -390,32 +390,29 @@
                                         <form role="form" class="form-horizontal">
                                             <fieldset>
                                                 <div class="form-group">
-                                                    <label class="col-sm-4 control-label">Address:</label>
+                                                    <label class="col-sm-4 control-label">Your Zipcode:</label>
                                                     <div class="col-sm-5">
-                                                        <input type="text" class="form-control input-lg" placeholder="Enter an Address, City and State, or ZIP Code:"></input>
+                                                        <input type="text" id="pharmacyAddress" class="form-control input-lg" placeholder="Enter an Address, City and State, or ZIP Code:"></input>
                                                     </div>
                                                 </div>
                                             </fieldset>
                                         </form>
                                     </div>
                                     <div class="col-sm-6 col-md-6">
-                                        <form role="form" class="form-horizontal">
                                             <fieldset>
                                                 <div class="form-group">
                                                     <label class="col-sm-4 control-label">Search Within:</label>
                                                     <div class="col-sm-5">
-                                                        <select class="form-control input-lg">
-                                                            <option value="5 Miles">5 Miles</option>
-                                                            <option value="10 Miles">10 Miles</option>
-                                                            <option value="20 Miles">20 Miles</option>
+                                                        <select id="searchRadius" class="form-control input-lg">
+                                                            <option value="5">5 Miles</option>
+                                                            <option value="10">10 Miles</option>
+                                                            <option value="20">20 Miles</option>
                                                         </select>
                                                         <br></br>
-                                                        <input type="submit" class="btn btn-info" value="Locate Pharmacy"/>
+                                                        <input type="submit" id="locateAPharmacyBtn" class="btn btn-info" value="Locate Pharmacy"/>
                                                     </div>
                                                 </div>
-
                                             </fieldset>
-                                        </form>
                                     </div>
 
                                 </div>
@@ -456,25 +453,56 @@
 </div>
 <input id="tokenId" type="hidden" th:value="${token}" ></input>
 
+
+
 <script>
+
     var map = new GMaps({
-    div: '#map',
-    lat: -12.043333,
-    lng: -77.028333
-});
-</script>
-
-<!--<script>
-
-    var map;
-
-    $(function() {
-        map = new GMaps({
-          div: '#googleMap',
-          lat: -12.043333,
-          lng: -77.028333
-        });
+        div: '#map',
+        zoom: 5,
+        lat: 37.09024,
+        lng: -95.712891
     });
+
+
+    $('#locateAPharmacyBtn').click(function(){
+
+        GMaps.geocode({
+             address: $('#pharmacyAddress').val() ,
+             callback: function( results, status) {
+                 if( status == 'OK') {
+
+                     var latlng = results[0].geometry.location;
+                     map.setCenter(latlng.lat(), latlng.lng());
+                     map.setZoom(12);
+
+
+                 }
+             }
+         });
+
+
+        $.get( "/findPharmacy",
+            {token: $('#tokenId').val(),  zipcode : $('#pharmacyAddress').val() , radius :  $('#searchRadius').val() },
+            function(addresses) {
+
+                $.each(addresses, function(index, addr) {
+
+                    var content = '<p>' + addr.name + '<br/>' + addr.city + ' ' + addr.state + ',' + addr.zipcode + '<br/> Miles Away:' + addr.milesAway + '<br/> Fax:' + addr.fax +  '</p>'
+
+                    map.addMarker({
+                        lat:addr.latitude,
+                        lng:addr.longitude,
+                        title:addr.name,
+                        infoWindow: { content : content }
+                    });
+                });
+
+            }
+        );
+    });
+
+
 
     $('#dependent').change(function() {
         $("#prescriptionHistoryTable tbody").remove();
@@ -502,7 +530,7 @@
     }
 
 
-</script>-->
+</script>
 
 </body>
 </html>

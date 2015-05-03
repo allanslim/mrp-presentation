@@ -3,6 +3,7 @@ package com.codewarrior.csc686.project.presentation.service;
 import com.codewarrior.csc686.project.presentation.client.MrxClient;
 import com.codewarrior.csc686.project.presentation.model.Dependent;
 import com.codewarrior.csc686.project.presentation.model.InsuranceForm;
+import com.codewarrior.csc686.project.presentation.model.Pharmacy;
 import com.codewarrior.csc686.project.presentation.model.PrescriptionHistory;
 import com.codewarrior.csc686.project.presentation.util.Either;
 import com.codewarrior.csc686.project.presentation.util.MrxError;
@@ -23,17 +24,21 @@ public class UserService {
 
     public Either<MrxError, String> login(String email, String password) { return  mrxClient.login(email, password); }
 
+
     public boolean validateToken(String token) { return StringUtils.isBlank(mrxClient.getToken(token))? false : true;  }
+
 
     public Either<MrxError, Boolean> isMemberInsuranceInTheSystem(InsuranceForm insuranceForm) {
 
         return mrxClient.isMemberInsuranceInTheSystem(insuranceForm);
     }
 
+
     public Either<MrxError, Boolean> isEmailAvailable(InsuranceForm insuranceForm) {
 
         return mrxClient.isEmailAvailable(insuranceForm);
     }
+
 
     public Either<MrxError, Boolean> registerUser(InsuranceForm insuranceForm) {
 
@@ -60,5 +65,10 @@ public class UserService {
 
     public Either<MrxError, List<PrescriptionHistory>> retrievePrescriptionHistory(String token, String mrbId, int period) {
         return mrxClient.retrievePrescriptionHistory(token, mrbId, period);
+    }
+
+    public Either<MrxError, List<Pharmacy>> retrievePharmacies(String token, String zipcode, int radius) {
+
+        return mrxClient.retrievePharmacies(token, zipcode, radius);
     }
 }

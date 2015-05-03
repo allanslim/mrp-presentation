@@ -2,6 +2,7 @@ package com.codewarrior.csc686.project.presentation.controller;
 
 import com.codewarrior.csc686.project.presentation.model.Dependent;
 import com.codewarrior.csc686.project.presentation.model.LoginCredential;
+import com.codewarrior.csc686.project.presentation.model.Pharmacy;
 import com.codewarrior.csc686.project.presentation.model.PrescriptionHistory;
 import com.codewarrior.csc686.project.presentation.service.UserService;
 import com.codewarrior.csc686.project.presentation.util.Either;
@@ -118,6 +119,23 @@ public class HomePageController extends BaseController {
         }
         return new ArrayList<>();
     }
+
+    @RequestMapping( method = RequestMethod.GET, value = "/findPharmacy")
+    @ResponseBody
+    public List<Pharmacy> findPharmacy(  @RequestParam(value = "token") String token,
+                                         @RequestParam(value = "zipcode") String zipcode,
+                                         @RequestParam(value = "radius") int radius) {
+
+
+        Either<MrxError, List<Pharmacy>> pharmacies = userService.retrievePharmacies(token, zipcode, radius);
+
+        if(pharmacies.isRight()) {
+            return pharmacies.right();
+        }
+
+        return new ArrayList<>();
+    }
+
 
     @RequestMapping(method = RequestMethod.GET, value = "/portal")
     public String portal(HttpServletRequest request, Model model){
