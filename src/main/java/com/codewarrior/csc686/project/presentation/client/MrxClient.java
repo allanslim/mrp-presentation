@@ -1,9 +1,6 @@
 package com.codewarrior.csc686.project.presentation.client;
 
-import com.codewarrior.csc686.project.presentation.model.Dependent;
-import com.codewarrior.csc686.project.presentation.model.InsuranceForm;
-import com.codewarrior.csc686.project.presentation.model.PrescriptionHistory;
-import com.codewarrior.csc686.project.presentation.model.RegisterUserInput;
+import com.codewarrior.csc686.project.presentation.model.*;
 import com.codewarrior.csc686.project.presentation.util.Either;
 import com.codewarrior.csc686.project.presentation.util.MrxError;
 import com.fasterxml.jackson.core.JsonParseException;
@@ -165,6 +162,34 @@ public class MrxClient extends BaseClient {
          return Either.left(new MrxError("Generic Error", "Generic Error"));
     }
 
+
+    public Either<MrxError, List<Pharmacy>> retrievePharmacies(String token, String zipcode, int radius) {
+
+        RestTemplate restTemplate = createRestTemplate();
+
+         HttpEntity<String> entity = createHttpEntity();
+
+        String url = middleTierHost + "/mrxuser/pharmacy/" + token + "/zipcode/" + zipcode + "/radius/" + radius;
+
+        try {
+              ResponseEntity<List> responseEntity = restTemplate.exchange(url, HttpMethod.GET, entity, List.class);
+
+              List<Pharmacy> responseBody = responseEntity.getBody();
+
+              if (responseEntity.getStatusCode() == HttpStatus.OK) {
+                  return Either.right(responseBody);
+              }
+
+          } catch (HttpClientErrorException e) {
+              LOG.error(e.getResponseBodyAsString(), e);
+              return Either.left(new MrxError(e.getStatusCode().toString(), "Invalid Credentials"));
+
+          }
+
+          return Either.left(new MrxError("Generic Error", "Generic Error"));
+
+    }
+
     public Either<MrxError, List<Dependent>> retrieveDependents(String token) {
 
         RestTemplate restTemplate = createRestTemplate();
@@ -319,6 +344,7 @@ public class MrxClient extends BaseClient {
         headers.setAccept(acceptTypes);
         return headers;
     }
+
 
 
 }
