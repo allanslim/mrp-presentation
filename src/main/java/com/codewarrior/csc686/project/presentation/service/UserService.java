@@ -1,10 +1,7 @@
 package com.codewarrior.csc686.project.presentation.service;
 
 import com.codewarrior.csc686.project.presentation.client.MrxClient;
-import com.codewarrior.csc686.project.presentation.model.Dependent;
-import com.codewarrior.csc686.project.presentation.model.InsuranceForm;
-import com.codewarrior.csc686.project.presentation.model.Pharmacy;
-import com.codewarrior.csc686.project.presentation.model.PrescriptionHistory;
+import com.codewarrior.csc686.project.presentation.model.*;
 import com.codewarrior.csc686.project.presentation.util.Either;
 import com.codewarrior.csc686.project.presentation.util.MrxError;
 import org.apache.commons.lang3.StringUtils;
@@ -71,4 +68,5 @@ public class UserService {
 
         return mrxClient.retrievePharmacies(token, zipcode, radius);
     }
+
 }

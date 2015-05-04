@@ -1,9 +1,6 @@
 package com.codewarrior.csc686.project.presentation.controller;
 
-import com.codewarrior.csc686.project.presentation.model.Dependent;
-import com.codewarrior.csc686.project.presentation.model.LoginCredential;
-import com.codewarrior.csc686.project.presentation.model.Pharmacy;
-import com.codewarrior.csc686.project.presentation.model.PrescriptionHistory;
+import com.codewarrior.csc686.project.presentation.model.*;
 import com.codewarrior.csc686.project.presentation.service.UserService;
 import com.codewarrior.csc686.project.presentation.util.Either;
 import com.codewarrior.csc686.project.presentation.util.MrxError;
@@ -31,7 +28,7 @@ public class HomePageController extends BaseController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(method = RequestMethod.GET, value = "/")
+    @RequestMapping(method = RequestMethod.GET, value = "/login")
     public String index(LoginCredential loginCredential, Model model) {
         createDefaultSignInOutLink(model);
         model.addAttribute("showPortal", false);
@@ -68,7 +65,7 @@ public class HomePageController extends BaseController {
         if (eitherToken.isRight()) {
             createSignInOutLink(model, "Sign Out", "/signOut");
             response.addCookie(new Cookie("token", eitherToken.right()));
-            return "redirect:/home";
+            return "redirect:/login";
         }
 
         MrxError mrxError = eitherToken.left();
@@ -80,18 +77,28 @@ public class HomePageController extends BaseController {
 
 
 
-    @RequestMapping(method = RequestMethod.GET, value = "/home")
+    @RequestMapping(method = RequestMethod.GET, value = "/")
     public String home(HttpServletRequest request,  Model model) {
         createDefaultSignInOutLink(model);
         model.addAttribute("showPortal", false);
 
         if (isTokenValid(request)) {
+
+            Optional<String> optionalToken = extractToken(request);
+
+            Either<MrxError, Map<String, String>> annualBenefits = userService.retrieveAnnualBenefits(optionalToken.get());
+
+            if(annualBenefits.isRight()) {
+                Map<String, String> annualBenefitsMap = annualBenefits.right();
+                model.addAllAttributes(annualBenefitsMap);
+                model.addAttribute("welcomeMessage",  "Welcome " + annualBenefitsMap.get("firstName") + " " + annualBenefitsMap.get("lastName"));
+            }
+
             createSignInOutLink(model, "Sign Out", "/signOut");
             model.addAttribute("showPortal", true);
-            return "home";
         }
 
-        return "redirect:/";
+        return "home";
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/about")
@@ -142,7 +149,6 @@ public class HomePageController extends BaseController {
         createDefaultSignInOutLink(model);
         model.addAttribute("showPortal", false);
 
-        model.addAttribute("greeting", "Hello Allan");
 
         if (isTokenValid(request)) {
             createSignInOutLink(model, "Sign Out", "/signOut");
@@ -180,7 +186,7 @@ public class HomePageController extends BaseController {
             return "portal";
         }
 
-        return "redirect:/";
+        return "redirect:/login";
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/contactUs")
