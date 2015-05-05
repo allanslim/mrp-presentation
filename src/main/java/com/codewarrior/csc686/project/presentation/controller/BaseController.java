@@ -14,6 +14,6 @@ public class BaseController {
     }
 
     protected void createDefaultSignInOutLink(Model model) {
-        createSignInOutLink(model, "Sign In", "/");
+        createSignInOutLink(model, "Sign In", "/login");
     }
 }

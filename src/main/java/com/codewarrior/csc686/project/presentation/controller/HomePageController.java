@@ -65,7 +65,7 @@ public class HomePageController extends BaseController {
         if (eitherToken.isRight()) {
             createSignInOutLink(model, "Sign Out", "/signOut");
             response.addCookie(new Cookie("token", eitherToken.right()));
-            return "redirect:/login";
+            return "redirect:/";
         }
 
         MrxError mrxError = eitherToken.left();

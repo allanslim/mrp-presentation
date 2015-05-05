@@ -231,6 +231,7 @@
                                                 </select>
                                             </div>
                                         </div>
+                                        <img id="selectMemberDropDownLoader" src="images/ajax-loader.gif" />
                                     </fieldset>
                                 </form>
                                 <form role="form" class="form-horizontal">
@@ -244,6 +245,7 @@
                                                     <option value="12">12 Months</option>
                                                 </select>
                                             </div>
+                                            <img id="selectTimeDropDownLoader" src="images/ajax-loader.gif" />
                                         </div>
                                     </fieldset>
                                 </form>
@@ -260,6 +262,14 @@
                                 </tr>
                                 </thead>
                                 <tbody>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
                                 <tr>
                                     <td></td>
                                     <td></td>
@@ -409,6 +419,7 @@
                                                             <option value="20">20 Miles</option>
                                                         </select>
                                                         <br></br>
+                                                        <img id="locateAPharmacyLoader" src="images/ajax-loader.gif" />
                                                         <input type="submit" id="locateAPharmacyBtn" class="btn btn-info" value="Locate Pharmacy"/>
                                                     </div>
                                                 </div>
@@ -457,6 +468,13 @@
 
 <script>
 
+    $(function() {
+        $('#selectMemberDropDownLoader').hide();
+        $('#selectTimeDropDownLoader').hide();
+        $('#locateAPharmacyLoader').hide();
+    });
+
+
     var map = new GMaps({
         div: '#map',
         zoom: 5,
@@ -466,18 +484,19 @@
 
 
     $('#locateAPharmacyBtn').click(function(){
-
+        $('#locateAPharmacyLoader').show();
         GMaps.geocode({
              address: $('#pharmacyAddress').val() ,
              callback: function( results, status) {
                  if( status == 'OK') {
-
+                     $('#locateAPharmacyLoader').hide();
                      var latlng = results[0].geometry.location;
                      map.setCenter(latlng.lat(), latlng.lng());
                      map.setZoom(12);
 
 
                  }
+                 $('#locateAPharmacyLoader').hide();
              }
          });
 
@@ -505,20 +524,26 @@
 
 
     $('#dependent').change(function() {
-        $("#prescriptionHistoryTable tbody").remove();
+        $('#selectMemberDropDownLoader').show();
         updateTable();
     });
 
     $('#period').change(function() {
-        $("#prescriptionHistoryTable tbody").remove();
+        $('#selectTimeDropDownLoader').show();
         updateTable();
 
     });
 
     var updateTable = function() {
+
         $.get( "/prescriptionHistory",
             {token: $('#tokenId').val(),  mrbId : $('#dependent').val() , period :  $('#period').val() },
             function(data) {
+
+                $("#prescriptionHistoryTable tbody").remove();
+                $('#selectMemberDropDownLoader').hide();
+                $('#selectTimeDropDownLoader').hide();
+
                 $.each(data, function(index, value) {
                     var row = "<tr><td>" + index + "</td><td>"+ value.rxNumber +"</td><td>"+ value.dateFilled + "</td><td>"+ value.drug +"</td><td>"+ value.mbrPaid +"</td><td>" + value.pharmacy + "</td></tr>";
 
