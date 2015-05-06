@@ -144,6 +144,7 @@ public class HomePageController extends BaseController {
     }
 
 
+
     @RequestMapping(method = RequestMethod.GET, value = "/portal")
     public String portal(HttpServletRequest request, Model model){
         createDefaultSignInOutLink(model);

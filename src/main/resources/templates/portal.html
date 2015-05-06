@@ -332,7 +332,9 @@
                                                 <div class="col-sm-5">
                                                     <input type="text" class="form-control input-lg" placeholder="Example: Ibuprofen"></input>
                                                 </div>
-                                                <a href="#" class="btn btn-lg btn-primary">Search</a>
+                                                <img id="searchDrugNameLoader" src="images/ajax-loader.gif" />
+                                                <button id="searchDrugName" class="btn btn-lg btn-primary">Search</button>
+
                                             </div>
                                             </fieldset>
                                         </form>
@@ -341,7 +343,7 @@
                             <div class="row>">
                                 <div class="col-sm-12 col-md-6 col-md-offset-3">
                                     <h4>Choose a drug matching your criteria below:</h4>
-                                    <div class="list-group">
+                                    <div id="drugMatchList" class="list-group">
                                         <a href="#" class="list-group-item">DB call</a>
                                         <a href="#" class="list-group-item">DB call</a>
                                         <a href="#" class="list-group-item">DB call</a>
@@ -494,6 +496,29 @@
         zoom: 5,
         lat: 37.09024,
         lng: -95.712891
+    });
+
+
+    $('#searchDrugName').click( function() {
+        // drugMatchList
+//        $.get( "/findPharmacy",
+//                   {token: $('#tokenId').val(),  zipcode : $('#pharmacyAddress').val() , radius :  $('#searchRadius').val() },
+//                   function(addresses) {
+//
+//                       $.each(addresses, function(index, addr) {
+//
+//                           var content = '<p>' + addr.name + '<br/>' + addr.city + ' ' + addr.state + ',' + addr.zipcode + '<br/> Miles Away:' + addr.milesAway + '<br/> Fax:' + addr.fax +  '</p>'
+//
+//                           map.addMarker({
+//                               lat:addr.latitude,
+//                               lng:addr.longitude,
+//                               title:addr.name,
+//                               infoWindow: { content : content }
+//                           });
+//                       });
+//
+//                   }
+//               );
     });
 
 
