@@ -6,6 +6,7 @@ import com.codewarrior.csc686.project.presentation.util.MrxError;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.*;
@@ -32,13 +33,17 @@ public class MrxClient extends BaseClient {
     //curl -i "http://localhost:9595/mrxuser/token/1WACSNQD9O51MVBAV7XNOFM4AGLOOVM24S5GW1D80W2VHYA2FW"
     public String getToken( String token) {
 
-        HttpEntity<String> entity = createHttpEntity();
+        if (StringUtils.isNotBlank(token)) {
+            HttpEntity<String> entity = createHttpEntity();
 
-        RestTemplate restTemplate = createRestTemplate();
+            RestTemplate restTemplate = createRestTemplate();
 
-        ResponseEntity<Map> responseEntity = restTemplate.exchange( middleTierHost + "/mrxuser/token/" + token, HttpMethod.GET, entity, Map.class);
+            ResponseEntity<Map> responseEntity = restTemplate.exchange( middleTierHost + "/mrxuser/token/" + token, HttpMethod.GET, entity, Map.class);
 
-        return (String) responseEntity.getBody().get("token");
+            return (String) responseEntity.getBody().get("token");
+        }
+
+        return "";
 
     }
 
@@ -162,6 +167,87 @@ public class MrxClient extends BaseClient {
          return Either.left(new MrxError("Generic Error", "Generic Error"));
     }
 
+
+    public Either<MrxError, List<String>> retrieveDrugs(String token, String drug) {
+
+        RestTemplate restTemplate = createRestTemplate();
+
+         HttpEntity<String> entity = createHttpEntity();
+
+        String url = middleTierHost + "/mrxuser/" + token + "/drug/" + drug;
+
+        try {
+              ResponseEntity<List> responseEntity = restTemplate.exchange(url, HttpMethod.GET, entity, List.class);
+
+              List<String> drugs = responseEntity.getBody();
+
+              if (responseEntity.getStatusCode() == HttpStatus.OK) {
+                  return Either.right(drugs);
+              }
+
+          } catch (HttpClientErrorException e) {
+              LOG.error(e.getResponseBodyAsString(), e);
+              return Either.left(new MrxError(e.getStatusCode().toString(), "Invalid Credentials"));
+
+          }
+
+          return Either.left(new MrxError("Generic Error", "Generic Error"));
+
+    }
+
+    public Either<MrxError, List<DrugDetail>> retrieveDrugDetails(String token, String drugDescription) {
+
+        RestTemplate restTemplate = createRestTemplate();
+
+         HttpEntity<String> entity = createHttpEntity();
+
+        String url = middleTierHost + "/mrxuser/" + token + "/drug-details/" + drugDescription;
+
+        try {
+              ResponseEntity<List> responseEntity = restTemplate.exchange(url, HttpMethod.GET, entity, List.class);
+
+              List<DrugDetail> drugs = responseEntity.getBody();
+
+              if (responseEntity.getStatusCode() == HttpStatus.OK) {
+                  return Either.right(drugs);
+              }
+
+          } catch (HttpClientErrorException e) {
+              LOG.error(e.getResponseBodyAsString(), e);
+              return Either.left(new MrxError(e.getStatusCode().toString(), "Invalid Credentials"));
+
+          }
+
+          return Either.left(new MrxError("Generic Error", "Generic Error"));
+
+    }
+
+    public Either<MrxError, DrugPrice> retrieveDrugPrice(String token, String drugNdc, String pharmacyId) {
+
+        RestTemplate restTemplate = createRestTemplate();
+
+         HttpEntity<String> entity = createHttpEntity();
+
+        String url = middleTierHost + "/mrxuser/" + token + "/drug-price/" + drugNdc + "/pharmacyId/" + pharmacyId;
+
+        try {
+              ResponseEntity<DrugPrice> responseEntity = restTemplate.exchange(url, HttpMethod.GET, entity, DrugPrice.class);
+
+            DrugPrice drugPrice = responseEntity.getBody();
+
+              if (responseEntity.getStatusCode() == HttpStatus.OK) {
+                  return Either.right(drugPrice);
+              }
+
+          } catch (HttpClientErrorException e) {
+              LOG.error(e.getResponseBodyAsString(), e);
+              return Either.left(new MrxError(e.getStatusCode().toString(), "Invalid Credentials"));
+
+          }
+
+          return Either.left(new MrxError("Generic Error", "Generic Error"));
+
+    }
 
     public Either<MrxError, List<Pharmacy>> retrievePharmacies(String token, String zipcode, int radius) {
 

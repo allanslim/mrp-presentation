@@ -143,6 +143,52 @@ public class HomePageController extends BaseController {
         return new ArrayList<>();
     }
 
+    @RequestMapping(method = RequestMethod.GET, value = "/findDrugs")
+    @ResponseBody
+    public List<String> findDrugs(@RequestParam(value = "token") String token,
+                                  @RequestParam(value = "drug") String drug) {
+
+        Either<MrxError, List<String>> drugs = userService.retrieveDrugs(token, drug);
+
+        if(drugs.isRight()) {
+            return drugs.right();
+        }
+
+
+        return new ArrayList<>();
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/findDrugDetails")
+    @ResponseBody
+    public List<DrugDetail> findDrugDetails(@RequestParam(value = "token") String token,
+                                  @RequestParam(value = "drugDescription") String drugDescription) {
+
+        Either<MrxError, List<DrugDetail>> drugs = userService.findDrugDetails(token, drugDescription);
+
+        if(drugs.isRight()) {
+            return drugs.right();
+        }
+
+
+        return new ArrayList<>();
+    }
+
+
+    @RequestMapping(method = RequestMethod.GET, value = "/findDrugPrice")
+    @ResponseBody
+    public DrugPrice findDrugPrice(@RequestParam(value = "token") String token,
+                                  @RequestParam(value = "drugNdc") String drugNdc,
+                                   @RequestParam(value = "pharmacyId") String pharmacyId) {
+
+        Either<MrxError, DrugPrice> drugPrice = userService.findDrugPrice(token, drugNdc, pharmacyId);
+
+        if(drugPrice.isRight()) {
+            return drugPrice.right();
+        }
+
+        return new DrugPrice();
+    }
+
 
 
     @RequestMapping(method = RequestMethod.GET, value = "/portal")

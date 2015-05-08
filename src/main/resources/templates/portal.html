@@ -306,48 +306,33 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-6 col-md-6">
-                                    <!--<form role="form" class="form-horizontal">-->
-                                        <!--<fieldset>-->
-                                            <!--<div class="form-group">-->
-                                                <!--<label class="col-sm-2 control-label">Select Member:</label>-->
-                                                <!--<div class="col-sm-3">-->
-                                                    <!--<select class="form-control">-->
-                                                        <!--<option value="1">1</option>-->
-                                                        <!--<option value="2">2</option>-->
-                                                        <!--<option value="3">3</option>-->
-                                                    <!--</select>-->
-                                                <!--</div>-->
-                                            <!--</div>-->
-                                        <!--</fieldset>-->
-                                    <!--</form>-->
+                                    <img id="searchDrugNameLoader" src="images/ajax-loader.gif" />
                                 </div>
                             </div>
                             </div>
                             <div class="row">
                                 <div class="col-sm-6 col-md-6 col-md-offset-2">
-                                    <form role="form" class="form-horizontal">
+
                                         <fieldset>
                                             <div class="form-group">
                                                 <label class="col-sm-5 control-label">Enter Drug Name:</label>
                                                 <div class="col-sm-5">
-                                                    <input type="text" class="form-control input-lg" placeholder="Example: Ibuprofen"></input>
+                                                    <input id="drugName" type="text" class="form-control input-lg" placeholder="Example: Ibuprofen"></input>
                                                 </div>
-                                                <img id="searchDrugNameLoader" src="images/ajax-loader.gif" />
                                                 <button id="searchDrugName" class="btn btn-lg btn-primary">Search</button>
-
                                             </div>
                                             </fieldset>
-                                        </form>
+
                                     </div>
                                 </div>
                             <div class="row>">
                                 <div class="col-sm-12 col-md-6 col-md-offset-3">
                                     <h4>Choose a drug matching your criteria below:</h4>
-                                    <div id="drugMatchList" class="list-group">
-                                        <a href="#" class="list-group-item">DB call</a>
-                                        <a href="#" class="list-group-item">DB call</a>
-                                        <a href="#" class="list-group-item">DB call</a>
-                                    </div>
+                                    <select id="drugMatchList" class="list-group" size="4">
+                                        <option class="list-group-item"></option>
+                                    </select>
+                                    <br/>
+                                    <button id="findDrugDetail" class="btn btn-lg btn-primary">Search For Variation</button>
                                 </div>
                             </div>
                             <div class="row">
@@ -355,10 +340,8 @@
 
                                     <div class="col-sm-12 col-md-6 col-md-offset-3">
                                         <label class="col-sm-4 control-label">Select a Form and Strength:</label>
-                                        <select class="form-control input-lg">
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
+                                        <select id="formAndStrength" class="form-control input-lg">
+                                            <option value="1">Form And Strength</option>
                                         </select>
                                     </div>
                                 </div>
@@ -367,10 +350,8 @@
 
                                     <div class="col-sm-12 col-md-6 col-md-offset-3">
                                         <label class="col-sm-4 control-label">Select Dosage:</label>
-                                        <select class="form-control input-lg">
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
+                                        <select id="dosage" class="form-control input-lg">
+                                            <option value="1">Dosage</option>
                                         </select>
                                     </div>
                                 </div>
@@ -378,7 +359,7 @@
                                 <br></br>
                                 <br></br>
                                 <div class="col-md-8 col-md-offset-5">
-                                    <a href="#" class="btn btn-lg btn-primary"
+                                    <a href="#" id="lookUpPrice" class="btn btn-lg btn-primary"
                                        data-toggle="modal"
                                        data-target="#basicModal">Look Up Price</a>
                                 </div>
@@ -470,7 +451,12 @@
                 <h4 class="modal-title" id="myModalLabel">Pricing</h4>
             </div>
             <div class="modal-body">
-                <h3>Add database pull here</h3>
+                <h3>Brand Gen: <p id="brandGen"></p></h3>
+                <h3>Formulary Status <p id="formularyStatus"></p></h3>
+                <h3>Drug Name <p  id="drugNameInfo"></p></h3>
+                <h3>Retail <p  id="retail"></p></h3>
+                <h3>EDS90 <p id="eds90"></p></h3>
+                <h3>Mail Order <p id="mailOrder"></p></h3>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -488,6 +474,7 @@
         $('#selectMemberDropDownLoader').hide();
         $('#selectTimeDropDownLoader').hide();
         $('#locateAPharmacyLoader').hide();
+        $('#searchDrugNameLoader').hide();
     });
 
 
@@ -501,24 +488,61 @@
 
     $('#searchDrugName').click( function() {
         // drugMatchList
-//        $.get( "/findPharmacy",
-//                   {token: $('#tokenId').val(),  zipcode : $('#pharmacyAddress').val() , radius :  $('#searchRadius').val() },
-//                   function(addresses) {
-//
-//                       $.each(addresses, function(index, addr) {
-//
-//                           var content = '<p>' + addr.name + '<br/>' + addr.city + ' ' + addr.state + ',' + addr.zipcode + '<br/> Miles Away:' + addr.milesAway + '<br/> Fax:' + addr.fax +  '</p>'
-//
-//                           map.addMarker({
-//                               lat:addr.latitude,
-//                               lng:addr.longitude,
-//                               title:addr.name,
-//                               infoWindow: { content : content }
-//                           });
-//                       });
-//
-//                   }
-//               );
+        $('#searchDrugNameLoader').show();
+        $('#drugMatchList option').remove();
+        $.get( "/findDrugs",
+                   {token: $('#tokenId').val(),  drug : $('#drugName').val() },
+                   function(drugs) {
+
+                       $.each(drugs, function(index, drug) {
+
+                          var drugElement =  "<option class='list-group-item selectedDrugs'>" + drug + "</option>";
+
+                           $('#drugMatchList').append(drugElement);
+
+                       });
+                       $('#searchDrugNameLoader').hide();
+                   }
+               );
+    });
+
+    $('#findDrugDetail').click(function () {
+        $('#searchDrugNameLoader').show();
+        $('#formAndStrength option').remove();
+        $('#dosage option').remove();
+
+        $.get("/findDrugDetails",
+                {token: $('#tokenId').val(), drugDescription: $('#drugMatchList').val()},
+                function (drugDetails) {
+
+                    $.each(drugDetails, function (index, drugDetail) {
+
+                        var drugElement = "<option>" + drugDetail.drugDetail + "</option>";
+
+                        $('#formAndStrength').append(drugElement);
+
+                        var dosageElement = "<option>" + drugDetail.vNdc + "</option>";
+
+                        $('#dosage').append(dosageElement);
+
+                    });
+                    $('#searchDrugNameLoader').hide();
+                }
+        );
+    });
+
+    $('#basicModal').click(function() {
+
+        $.get("/findDrugPrice",
+                {token: $('#tokenId').val(), drugNdc: $('#dosage').val(), pharmacyId:1},
+                function (drugPrice) {
+
+                    $('#brandGen').text(drugPrice.brandGen);
+                    $('#formularyStatus').text(drugPrice.formularyStatus);
+                    $('#searchDrugNameLoader').hide();
+                }
+        );
+
     });
 
 

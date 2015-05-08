@@ -69,4 +69,18 @@ public class UserService {
         return mrxClient.retrievePharmacies(token, zipcode, radius);
     }
 
+    public Either<MrxError, List<String>> retrieveDrugs(String token, String drug) {
+
+        return mrxClient.retrieveDrugs(token, drug);
+    }
+
+    public Either<MrxError, List<DrugDetail>> findDrugDetails(String token, String drugDescription) {
+
+        return mrxClient.retrieveDrugDetails(token, drugDescription);
+    }
+
+    public Either<MrxError, DrugPrice> findDrugPrice(String token, String drugNdc, String pharmacyId) {
+
+        return mrxClient.retrieveDrugPrice(token, drugNdc, pharmacyId);
+    }
 }
