@@ -491,7 +491,7 @@
                     $.each(addresses, function (index, addr) {
 
 
-                        var drugElement = "<option value='" + addr.pharmacyId + "' >" + addr.name + "</option>";
+                        var drugElement = "<option value='" + addr.pharmacyId + "' >" + addr.name + " (" + addr.address1 + " - " + addr.city + ")</option>";
 
                         $('#pharmacySelect').append(drugElement);
                     });
