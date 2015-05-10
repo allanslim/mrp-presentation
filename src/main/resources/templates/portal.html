@@ -333,11 +333,11 @@
                                 <div class="col-sm-4 col-md-4 col-md-offset-4">
                                     <h4>Choose a drug matching your criteria below:</h4>
                                     <div class="myList">
-                                        <div class="list-group">
-                                            <a href="#" class="list-group-item">span blah blah DB call blah blah..room for 4</a>
-                                            <a href="#" class="list-group-item"></a>
-                                            <a href="#" class="list-group-item"></a>
-                                            <a href="#" class="list-group-item"></a>
+                                        <div class="list-group" >
+                                            <select id="drugMatchList" size="4" style="width: 100%">
+                                                <option></option>
+                                            </select>
+
                                         </div>
                                     </div>
                                     <br/>
@@ -458,7 +458,7 @@
                 <h3>Formulary Status <p id="formularyStatus"></p></h3>
                 <h3>Drug Name <p  id="drugNameInfo"></p></h3>
                 <h3>Retail <p  id="retail"></p></h3>
-                <h3>EDS90 <p id="eds90"></p></h3>
+                <h3>Extended Day Supply <p id="eds90"></p></h3>
                 <h3>Mail Order <p id="mailOrder"></p></h3>
             </div>
             <div class="modal-footer">
@@ -540,6 +540,11 @@
 
                     $('#brandGen').text(drugPrice.brandGen);
                     $('#formularyStatus').text(drugPrice.formularyStatus);
+                    $('#retail').text(drugPrice.retail);
+
+                    $('#eds90').text(drugPrice.eds90);
+
+                    $('#mailOrder').text(drugPrice.mailOrder);
                     $('#searchDrugNameLoader').hide();
                     $('#basicModal').show();
                 }
