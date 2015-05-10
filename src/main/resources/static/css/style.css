@@ -103,7 +103,7 @@ a {
     color:#fff;
   }
 #basicModal {
-top:45%;
+top:25%;
 outline: none;
 }
 
@@ -234,3 +234,15 @@ outline: none;
 /********************************/
 .myList {padding:50px 0px; }
 
+
+.ajax-image {
+     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=75)";
+        filter: alpha(opacity=75);
+        opacity: 0.75;
+        position: absolute;
+        z-index: 10000;
+        display: block;
+        top: 50%;
+        left: 50%;
+
+}

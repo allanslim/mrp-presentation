@@ -296,6 +296,11 @@
                             <h2>Welcome <span th:text="${fullName}"></span></h2>
                         </div>
                         <div class="row">
+                            <div class="text-center">
+                                <div class="ajax-image">
+                                <img id="searchDrugNameLoader" src="images/ajax-loader.gif" height="50" width="50" />
+                                </div>
+                            </div>
                             <div class="panel-body">
                                 <div class="col-sm-6 col-md-6">
                                     <div class="padded-multiline">
@@ -307,7 +312,7 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-6 col-md-4 pull-right">
-                                    <img id="searchDrugNameLoader" src="images/ajax-loader.gif" />
+
                                     <select id="pharmacySelect" class="form-control input-lg">
                                     </select>
                                 </div>
@@ -324,6 +329,7 @@
                                 </div>
                                 <div class="col-sm-4 col-md-4">
                                     <button id="searchDrugName" class="btn btn-lg btn-primary">Search</button>
+
                                 </div>
                             </div>
 
@@ -555,7 +561,7 @@
                     $('#brandGen').text(drugPrice.brandGen);
                     $('#formularyStatus').text(drugPrice.formularyStatus);
                     $('#retail').text(drugPrice.retail);
-
+                    $('#drugNameInfo').text(drugPrice.drugName);
                     $('#eds90').text(drugPrice.eds90);
 
                     $('#mailOrder').text(drugPrice.mailOrder);
