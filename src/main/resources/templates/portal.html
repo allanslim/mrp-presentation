@@ -309,8 +309,6 @@
                                 <div class="col-sm-6 col-md-4 pull-right">
                                     <img id="searchDrugNameLoader" src="images/ajax-loader.gif" />
                                     <select id="pharmacySelect" class="form-control input-lg">
-                                        <option value="1">Select a Pharmacy</option>
-                                        <option value="2">We can hard code in the pharmacies</option>
                                     </select>
                                 </div>
                             </div>
@@ -479,6 +477,22 @@
         $('#locateAPharmacyLoader').hide();
         $('#searchDrugNameLoader').hide();
         $('#basicModal').hide();
+
+        $.get("/findPharmacy",
+                {token: $('#tokenId').val(), zipcode: '92101', radius: 5},
+                function (addresses) {
+
+                    $.each(addresses, function (index, addr) {
+
+
+                        var drugElement = "<option value='" + addr.pharmacyId + "' >" + addr.name + "</option>";
+
+                        $('#pharmacySelect').append(drugElement);
+                    });
+
+                }
+        );
+
     });
 
 
@@ -535,7 +549,7 @@
     $('#lookUpPrice').click(function() {
 
         $.get("/findDrugPrice",
-                {token: $('#tokenId').val(), drugNdc: $('#formAndStrength').val(), pharmacyId:1},
+                {token: $('#tokenId').val(), drugNdc: $('#formAndStrength').val(), pharmacyId: $('#pharmacySelect').val()},
                 function (drugPrice) {
 
                     $('#brandGen').text(drugPrice.brandGen);
@@ -551,6 +565,7 @@
         );
 
     });
+
 
     $('#closeModal').click(function() {
         $('#basicModal').hide();
