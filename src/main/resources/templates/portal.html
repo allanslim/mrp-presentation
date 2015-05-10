@@ -306,34 +306,42 @@
                                         <hr></hr>
                                     </div>
                                 </div>
-                                <div class="col-sm-6 col-md-6">
+                                <div class="col-sm-6 col-md-4 pull-right">
                                     <img id="searchDrugNameLoader" src="images/ajax-loader.gif" />
+                                    <select id="pharmacySelect" class="form-control input-lg">
+                                        <option value="1">Select a Pharmacy</option>
+                                        <option value="2">We can hard code in the pharmacies</option>
+                                    </select>
                                 </div>
                             </div>
                             </div>
                             <div class="row">
-                                <div class="col-sm-6 col-md-6 col-md-offset-2">
+                                <div class="col-sm-4 col-md-4 col-md-offset-4">
 
                                         <fieldset>
                                             <div class="form-group">
-                                                <label class="col-sm-5 control-label">Enter Drug Name:</label>
-                                                <div class="col-sm-5">
-                                                    <input id="drugName" type="text" class="form-control input-lg" placeholder="Example: Ibuprofen"></input>
-                                                </div>
-                                                <button id="searchDrugName" class="btn btn-lg btn-primary">Search</button>
+                                                    <input id="drugName" type="text" class="form-control input-lg" placeholder="Enter Name of Drug"></input>
                                             </div>
-                                            </fieldset>
-
-                                    </div>
+                                        </fieldset>
                                 </div>
+                                <div class="col-sm-4 col-md-4">
+                                    <button id="searchDrugName" class="btn btn-lg btn-primary">Search</button>
+                                </div>
+                            </div>
+
                             <div class="row>">
-                                <div class="col-sm-12 col-md-6 col-md-offset-3">
+                                <div class="col-sm-4 col-md-4 col-md-offset-4">
                                     <h4>Choose a drug matching your criteria below:</h4>
-                                    <select id="drugMatchList" class="list-group" size="4">
-                                        <option class="list-group-item"></option>
-                                    </select>
+                                    <div class="myList">
+                                        <div class="list-group">
+                                            <a href="#" class="list-group-item">span blah blah DB call blah blah..room for 4</a>
+                                            <a href="#" class="list-group-item"></a>
+                                            <a href="#" class="list-group-item"></a>
+                                            <a href="#" class="list-group-item"></a>
+                                        </div>
+                                    </div>
                                     <br/>
-                                    <div class="col-md-8 col-md-offset-5">
+                                    <div class="col-md-8 col-md-offset-3">
                                         <button id="findDrugDetail" class="btn btn-lg btn-primary">Search For Variation</button>
                                     </div>
                                 </div>
@@ -341,7 +349,7 @@
                             <div class="row">
                                 <div class="form-group">
 
-                                    <div class="col-sm-12 col-md-6 col-md-offset-3">
+                                    <div class="col-sm-4 col-md-4 col-md-offset-4">
                                         <label class="col-sm-4 control-label">Select a Form and Strength:</label>
                                         <select id="formAndStrength" class="form-control input-lg">
                                             <option value="1">Form And Strength</option>
@@ -349,18 +357,16 @@
                                     </div>
                                 </div>
                                 <br></br>
-                                <div class="form-group">
 
-                                </div>
-                                <br></br>
-                                <br></br>
-                                <br></br>
-                                <div class="col-md-8 col-md-offset-5">
-                                    <a href="#" id="lookUpPrice" class="btn btn-lg btn-primary"
-                                       data-toggle="modal"
-                                       data-target="#basicModal">Look Up Price</a>
-                                </div>
+
                             </div>
+                        <div class="text-center">
+                            <br></br>
+                            <a href="#" id="lookUpPrice" class="btn btn-lg btn-primary"
+                               data-toggle="modal"
+                               data-target="#basicModal">Look Up Price</a>
+                            <br></br>
+                        </div>
 
                                 </div>
 
