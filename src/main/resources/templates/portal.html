@@ -35,10 +35,11 @@
 <div class="container-fluid">
     <div id="content">
         <ul id="tabs" data-tabs="tabs" class="nav nav-tabs nav-justified">
-            <li class="active"><a href="#Prescription" data-toggle="tab"> Prescription Benefit Summary</a> </li>
+            <li class="active"><a href="#Locate" data-toggle="tab">Locate a Pharmacy</a></li>
+
             <li><a href="#Claim" data-toggle="tab">Prescription History</a></li>
             <li><a href="#Drug" data-toggle="tab">Drug Price Lookup</a></li>
-            <li><a href="#Locate" data-toggle="tab">Locate a Pharmacy</a></li>
+            <li><a href="#Prescription" data-toggle="tab"> Prescription Benefit Summary</a> </li>
             <li><a href="#Health" data-toggle="tab">Health and Wellness</a></li>
         </ul>
         <div id="my-tab-content" class="tab-content">
@@ -332,7 +333,9 @@
                                         <option class="list-group-item"></option>
                                     </select>
                                     <br/>
-                                    <button id="findDrugDetail" class="btn btn-lg btn-primary">Search For Variation</button>
+                                    <div class="col-md-8 col-md-offset-5">
+                                        <button id="findDrugDetail" class="btn btn-lg btn-primary">Search For Variation</button>
+                                    </div>
                                 </div>
                             </div>
                             <div class="row">
@@ -348,12 +351,6 @@
                                 <br></br>
                                 <div class="form-group">
 
-                                    <div class="col-sm-12 col-md-6 col-md-offset-3">
-                                        <label class="col-sm-4 control-label">Select Dosage:</label>
-                                        <select id="dosage" class="form-control input-lg">
-                                            <option value="1">Dosage</option>
-                                        </select>
-                                    </div>
                                 </div>
                                 <br></br>
                                 <br></br>
@@ -518,13 +515,10 @@
 
                     $.each(drugDetails, function (index, drugDetail) {
 
-                        var drugElement = "<option>" + drugDetail.drugDetail + "</option>";
+                        var drugElement = "<option value='" + drugDetail.vNdc + "'>" + drugDetail.drugDetail + "</option>";
 
                         $('#formAndStrength').append(drugElement);
 
-                        var dosageElement = "<option>" + drugDetail.vNdc + "</option>";
-
-                        $('#dosage').append(dosageElement);
 
                     });
                     $('#searchDrugNameLoader').hide();
@@ -535,7 +529,7 @@
     $('#lookUpPrice').click(function() {
 
         $.get("/findDrugPrice",
-                {token: $('#tokenId').val(), drugNdc: $('#dosage').val(), pharmacyId:1},
+                {token: $('#tokenId').val(), drugNdc: $('#formAndStrength').val(), pharmacyId:1},
                 function (drugPrice) {
 
                     $('#brandGen').text(drugPrice.brandGen);
