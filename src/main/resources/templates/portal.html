@@ -478,6 +478,26 @@
 
 <script>
 
+    var updateTable = function() {
+
+        $.get( "/prescriptionHistory",
+            {token: $('#tokenId').val(),  mrbId : $('#dependent').val() , period :  $('#period').val() },
+            function(data) {
+
+                $("#prescriptionHistoryTable tbody").remove();
+                $('#selectMemberDropDownLoader').hide();
+                $('#selectTimeDropDownLoader').hide();
+
+                $.each(data, function(index, value) {
+                    var row = "<tr><td>" + index + "</td><td>"+ value.rxNumber +"</td><td>"+ value.dateFilled + "</td><td>"+ value.drug +"</td><td>"+ value.mbrPaid +"</td><td>" + value.pharmacy + "</td></tr>";
+
+                    $("#prescriptionHistoryTable").last().append(row);
+                });
+
+            }
+        );
+    }
+
     $(function() {
         $('#selectMemberDropDownLoader').hide();
         $('#selectTimeDropDownLoader').hide();
@@ -500,6 +520,7 @@
                 }
         );
 
+        updateTable();
     });
 
 
@@ -630,25 +651,7 @@
 
     });
 
-    var updateTable = function() {
 
-        $.get( "/prescriptionHistory",
-            {token: $('#tokenId').val(),  mrbId : $('#dependent').val() , period :  $('#period').val() },
-            function(data) {
-
-                $("#prescriptionHistoryTable tbody").remove();
-                $('#selectMemberDropDownLoader').hide();
-                $('#selectTimeDropDownLoader').hide();
-
-                $.each(data, function(index, value) {
-                    var row = "<tr><td>" + index + "</td><td>"+ value.rxNumber +"</td><td>"+ value.dateFilled + "</td><td>"+ value.drug +"</td><td>"+ value.mbrPaid +"</td><td>" + value.pharmacy + "</td></tr>";
-
-                    $("#prescriptionHistoryTable").last().append(row);
-                });
-
-            }
-        );
-    }
 
 
 </script>
