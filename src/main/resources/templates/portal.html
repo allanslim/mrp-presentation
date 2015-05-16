@@ -563,6 +563,7 @@
     });
 
 
+
     var map = new GMaps({
         div: '#map',
         zoom: 5,
@@ -691,7 +692,16 @@
     });
 
 
-<<<<<<< HEAD
+    var updateTable = function() {
+
+        $.get( "/prescriptionHistory",
+            {token: $('#tokenId').val(),  mrbId : $('#dependent').val() , period :  $('#period').val() },
+            function(data) {
+
+                $("#prescriptionHistoryTable tbody").remove();
+                $('#selectMemberDropDownLoader').hide();
+                $('#selectTimeDropDownLoader').hide();
+
                 $.each(data, function(index, value) {
                     var row = "<tr><td>" + index + "</td><td>"+ value.rxNumber +"</td><td>"+ value.dateFilled + "</td><td>"+ value.drug +"</td><td>"+ value.mbrPaid +"</td><td>" + value.pharmacy + "</td></tr>";
 
@@ -701,14 +711,7 @@
             }
         );
     }
-$(document).ready(function() {
-  $('[data-toggle=offcanvas]').click(function() {
-    $('.row-offcanvas').toggleClass('active');
-  });
-});
-=======
 
->>>>>>> b9a1e5164ae6c72c4fe7a10b2a5cffff2fe57750
 
 </script>
 
