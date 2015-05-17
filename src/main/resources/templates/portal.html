@@ -446,6 +446,45 @@
                 <div class="text-center">
                     <h1>Health and Wellness</h1>
                 </div>
+                <div class="container-fluid">
+
+                    <div class="row row-offcanvas row-offcanvas">
+
+
+                        <div class="col-sm-9 col-md-10 main col-md-offset-1">
+
+                            <!--toggle sidebar button-->
+                            <p class="visible-xs">
+                                <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas"><i class="glyphicon glyphicon-chevron-left"></i></button>
+                            </p>
+
+
+                            <div class="row placeholders">
+                                <div class="col-xs-6 col-sm-3 placeholder text-center">
+                                    <img src="images/webmd.jpg" class="center-block img-responsive img-circle" alt="Generic placeholder thumbnail">
+                                    <li><a href="http://www.webmd.com/"><h4>Web MD</h4></a></li>
+
+                                </div>
+                                <div class="col-xs-6 col-sm-3 placeholder text-center">
+                                    <img src="images/healthandwellness.jpg" class="center-block img-responsive img-circle" alt="Generic placeholder thumbnail">
+                                    <li><a href="http://www.health.com/health/"><h4>Health and Wellness</h4></a></li>
+
+                                </div>
+                                <div class="col-xs-6 col-sm-3 placeholder text-center">
+                                    <img src="images/womenshealth.jpg" class="center-block img-responsive img-circle" alt="Generic placeholder thumbnail">
+                                    <li><a href="http://www.healthywomen.org/"><h4>Womens Health</h4></a></li>
+
+                                </div>
+                                <div class="col-xs-6 col-sm-3 placeholder text-center">
+                                    <img src="images/mentalhealth.jpg" class="center-block img-responsive img-circle" alt="Generic placeholder thumbnail">
+                                    <li><a href="http://www.mentalhealth.gov/index.html"><h4>Mental Health</h4></a></li>
+
+                                </div>
+                            </div>
+                            <hr>
+                        </div><!--/row-->
+                    </div>
+                </div><!--/.container-->
             </div>
         </div><!--tab content-->
     </div><!--content-->
@@ -649,7 +688,11 @@
             }
         );
     }
-
+$(document).ready(function() {
+  $('[data-toggle=offcanvas]').click(function() {
+    $('.row-offcanvas').toggleClass('active');
+  });
+});
 
 </script>
 
