@@ -139,6 +139,31 @@ public class MrxClient extends BaseClient {
         return retrieveDataFromRest(middleTierHost + "/mrxuser/memberInfo/" + token );
     }
 
+    public Either<MrxError, Map<String, CopayDetail>> retrieveCopayDetails(String token) {
+
+        String url = middleTierHost + "/mrxuser/memberCopay/" + token;
+
+        RestTemplate restTemplate = createRestTemplate();
+
+        HttpEntity<String> entity = createHttpEntity();
+
+        try {
+            ResponseEntity<Map> responseEntity = restTemplate.exchange(url, HttpMethod.GET, entity, Map.class);
+
+            Map<String, CopayDetail> responseBody = responseEntity.getBody();
+
+            if (responseEntity.getStatusCode() == HttpStatus.OK) {
+                return Either.right(responseBody);
+            }
+
+        } catch (HttpClientErrorException e) {
+            LOG.error(e.getResponseBodyAsString(), e);
+            return Either.left(new MrxError(e.getStatusCode().toString(), "Invalid Credentials"));
+
+        }
+
+        return Either.left(new MrxError("Generic Error", "Generic Error"));
+    }
 
     // mrxuser/prescriptionHistory/PF9H76WF3J8J26LJ4VZN2SB36LIQNOYJ3BFZID0WHU1C0Z0K92/mrbId/34/period/3
     public Either<MrxError, List<PrescriptionHistory>> retrievePrescriptionHistory(String token, String mrbId, int period) {

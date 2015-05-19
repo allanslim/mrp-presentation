@@ -210,6 +210,7 @@ public class HomePageController extends BaseController {
 
                 Either<MrxError, Map<String, String>> welcomeSummary = userService.retrieveWelcomeSummary(optionalToken.get());
                 Either<MrxError, Map<String, String>> annualBenefits = userService.retrieveAnnualBenefits(optionalToken.get());
+                Either<MrxError, Map<String, CopayDetail>> copayDetails = userService.retrieveCopayDetails(optionalToken.get());
 
                 Either<MrxError, List<Dependent>> dependents = userService.retrieveDependents(optionalToken.get());
 
@@ -222,6 +223,11 @@ public class HomePageController extends BaseController {
                     Map<String, String> annualBenefitsMap = annualBenefits.right();
                     model.addAllAttributes(annualBenefitsMap);
                     model.addAttribute("fullName", annualBenefitsMap.get("firstName") + " " + annualBenefitsMap.get("lastName"));
+                }
+
+                if(copayDetails.isRight()) {
+                    Map<String, CopayDetail> memberCopayMap = copayDetails.right();
+                    model.addAttribute("memberCopayMap", memberCopayMap);
                 }
 
                 if(dependents.isRight()) {

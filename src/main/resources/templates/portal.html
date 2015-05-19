@@ -111,19 +111,19 @@
                                             <tbody>
                                             <tr>
                                                 <td>Formulary Generic</td>
-                                                <td>$8.00</td>
+                                                <td>$<span th:text="*{memberCopayMap['RETAIL (Regular supply)']['formulaGenericCopay']}"></span></td>
                                             </tr>
                                             <tr>
                                                 <td>Non-Forulary Generic</td>
-                                                <td>$8.00</td>
+                                                <td>$<span th:text="*{memberCopayMap['RETAIL (Regular supply)']['nonFormulaGenericCopay']}"></span></td>
                                             </tr>
                                             <tr>
                                                 <td>Formulary Brand</td>
-                                                <td>$30.00</td>
+                                                <td>$<span th:text="*{memberCopayMap['RETAIL (Regular supply)']['formulaBrandCopay']}"></span></td>
                                             </tr>
                                             <tr>
                                                 <td>Non-Formulary Brand</td>
-                                                <td>$50.00</td>
+                                                <td>$<span th:text="*{memberCopayMap['RETAIL (Regular supply)']['nonFormulaBrandCopay']}"></span></td>
                                             </tr>
 
                                             </tbody>
@@ -142,20 +142,21 @@
                                     <tbody>
                                     <tr>
                                         <td>Formulary Generic</td>
-                                        <td>$24.00</td>
+                                        <td>$<span th:text="*{memberCopayMap['RETAIL (Extended Day supply)']['formulaGenericCopay']}"></span></td>
                                     </tr>
                                     <tr>
                                         <td>Non-Forulary Generic</td>
-                                        <td>$24.00</td>
+                                        <td>$<span th:text="*{memberCopayMap['RETAIL (Extended Day supply)']['nonFormulaGenericCopay']}"></span></td>
                                     </tr>
                                     <tr>
                                         <td>Formulary Brand</td>
-                                        <td>$90.00</td>
+                                        <td>$<span th:text="*{memberCopayMap['RETAIL (Extended Day supply)']['formulaBrandCopay']}"></span></td>
                                     </tr>
                                     <tr>
                                         <td>Non-Formulary Brand</td>
-                                        <td>$150.00</td>
+                                        <td>$<span th:text="*{memberCopayMap['RETAIL (Extended Day supply)']['nonFormulaBrandCopay']}"></span></td>
                                     </tr>
+
 
                                     </tbody>
                                 </table>
@@ -175,20 +176,21 @@
                                 <tbody>
                                 <tr>
                                     <td>Formulary Generic</td>
-                                    <td>$16.00</td>
+                                    <td>$<span th:text="*{memberCopayMap['MAIL Order']['formulaGenericCopay']}"></span></td>
                                 </tr>
                                 <tr>
                                     <td>Non-Forulary Generic</td>
-                                    <td>$16.00</td>
+                                    <td>$<span th:text="*{memberCopayMap['MAIL Order']['nonFormulaGenericCopay']}"></span></td>
                                 </tr>
                                 <tr>
                                     <td>Formulary Brand</td>
-                                    <td>$60.00</td>
+                                    <td>$<span th:text="*{memberCopayMap['MAIL Order']['formulaBrandCopay']}"></span></td>
                                 </tr>
                                 <tr>
                                     <td>Non-Formulary Brand</td>
-                                    <td>$100.00</td>
+                                    <td>$<span th:text="*{memberCopayMap['MAIL Order']['nonFormulaBrandCopay']}"></span></td>
                                 </tr>
+
 
                                 </tbody>
                             </table>

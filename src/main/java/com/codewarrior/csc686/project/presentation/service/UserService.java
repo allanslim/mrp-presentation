@@ -83,4 +83,9 @@ public class UserService {
 
         return mrxClient.retrieveDrugPrice(token, drugNdc, pharmacyId);
     }
+
+    public Either<MrxError, Map<String, CopayDetail>> retrieveCopayDetails(String token) {
+
+        return mrxClient.retrieveCopayDetails(token);
+    }
 }
